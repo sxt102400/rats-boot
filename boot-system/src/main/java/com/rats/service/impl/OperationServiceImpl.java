@@ -3,7 +3,9 @@ package com.rats.service.impl;
 
 import java.util.List;
 import javax.annotation.Resource;
-import org.apache.ibatis.session.RowBounds;
+
+import com.rats.framework.common.persistence.Example;
+import com.rats.framework.common.persistence.GeneratedExample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,6 @@ import com.rats.service.OperationService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.page.PageImpl;
-import com.rats.framework.common.persistence.Example;
 
 /** Copyright (C) 2013 rats
  *
@@ -48,7 +49,7 @@ public class OperationServiceImpl implements OperationService {
      */
     @Override
     public long count(Operation condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.operationMapper.countByExample(example);
     }
 
@@ -61,7 +62,7 @@ public class OperationServiceImpl implements OperationService {
      */
     @Override
     public int delete(Operation condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.operationMapper.deleteByExample(example);
     }
 
@@ -109,7 +110,7 @@ public class OperationServiceImpl implements OperationService {
      */
     @Override
     public List<Operation> select(Operation condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.operationMapper.selectByExample(example);
     }
 
@@ -123,7 +124,7 @@ public class OperationServiceImpl implements OperationService {
      */
     @Override
     public Page<Operation> selectPage(Operation condition, Pageable pageable) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         List<Operation> data = operationMapper.selectByExample(example, pageable);
         Page<Operation> page = new PageImpl(data,pageable);
         return page;
@@ -153,7 +154,7 @@ public class OperationServiceImpl implements OperationService {
      */
     @Override
     public int update(Operation update, Operation  condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.operationMapper.updateByExample(update, example);
     }
 
@@ -167,7 +168,7 @@ public class OperationServiceImpl implements OperationService {
      */
     @Override
     public int updateSelective(Operation update, Operation  condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.operationMapper.updateByExampleSelective(update, example);
     }
 
@@ -198,9 +199,9 @@ public class OperationServiceImpl implements OperationService {
 
     public Example buildExample(Operation condition){
         Example example = new Example();
-        Example.Criteria criteria = example.createCriteria();
+        Example.Criteria<Operation> criteria = example.createCriteria();
         if (condition.getId() != null) {
-            criteria.andEqualTo( "id",condition.getId() );
+            criteria.andEqualTo( Operation::getId,condition.getId() );
         }
         if (condition.getParentId() != null) {
             criteria.andEqualTo( "parent_id",condition.getParentId() );

@@ -12,7 +12,7 @@ import com.rats.service.UserRoleService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.base.BaseController;
-import com.rats.framework.common.base.ResultBean;
+import com.rats.framework.common.base.ResponseBean;
  import com.rats.framework.common.page.PageHelper;
 
 
@@ -40,7 +40,7 @@ public class UserRoleController extends BaseController {
      * @return
      */
     @GetMapping(value = "/userRole/:id")
-    public ResultBean getById(@PathVariable Integer id ) {
+    public ResponseBean getById(@PathVariable Integer id ) {
         UserRole userRole = userRoleService.selectByPrimaryKey(id);
         return successData(userRole);
     }
@@ -68,7 +68,7 @@ public class UserRoleController extends BaseController {
      * @return
      */
     @PutMapping(value = "/userRole/:id")
-    public ResultBean doEdit(@PathVariable Integer id , UserRole userRole) {
+    public ResponseBean doEdit(@PathVariable Integer id , UserRole userRole) {
         userRoleService.updateByPrimaryKeySelective(userRole);
             return successData(null);
     }
@@ -80,7 +80,7 @@ public class UserRoleController extends BaseController {
      * @return
      */
     @PostMapping(value = "/userRole")
-    public ResultBean doSave(UserRole userRole) {
+    public ResponseBean doSave(UserRole userRole) {
         userRoleService.save(userRole);
         return successData(null);
     }
@@ -94,7 +94,7 @@ public class UserRoleController extends BaseController {
      */
     @DeleteMapping(value = "/userRole/:id")
     @ResponseBody
-    public ResultBean update(@PathVariable Integer id ) {
+    public ResponseBean update(@PathVariable Integer id ) {
         userRoleService.deleteByPrimaryKey(id);
         return successData(null);
     }

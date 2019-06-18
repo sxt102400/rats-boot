@@ -12,7 +12,7 @@ import com.rats.service.RolePermissionService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.base.BaseController;
-import com.rats.framework.common.base.ResultBean;
+import com.rats.framework.common.base.ResponseBean;
  import com.rats.framework.common.page.PageHelper;
 
 
@@ -40,7 +40,7 @@ public class RolePermissionController extends BaseController {
      * @return
      */
     @GetMapping(value = "/rolePermission/:id")
-    public ResultBean getById(@PathVariable Integer id ) {
+    public ResponseBean getById(@PathVariable Integer id ) {
         RolePermission rolePermission = rolePermissionService.selectByPrimaryKey(id);
         return successData(rolePermission);
     }
@@ -68,7 +68,7 @@ public class RolePermissionController extends BaseController {
      * @return
      */
     @PutMapping(value = "/rolePermission/:id")
-    public ResultBean doEdit(@PathVariable Integer id , RolePermission rolePermission) {
+    public ResponseBean doEdit(@PathVariable Integer id , RolePermission rolePermission) {
         rolePermissionService.updateByPrimaryKeySelective(rolePermission);
             return successData(null);
     }
@@ -80,7 +80,7 @@ public class RolePermissionController extends BaseController {
      * @return
      */
     @PostMapping(value = "/rolePermission")
-    public ResultBean doSave(RolePermission rolePermission) {
+    public ResponseBean doSave(RolePermission rolePermission) {
         rolePermissionService.save(rolePermission);
         return successData(null);
     }
@@ -94,7 +94,7 @@ public class RolePermissionController extends BaseController {
      */
     @DeleteMapping(value = "/rolePermission/:id")
     @ResponseBody
-    public ResultBean update(@PathVariable Integer id ) {
+    public ResponseBean update(@PathVariable Integer id ) {
         rolePermissionService.deleteByPrimaryKey(id);
         return successData(null);
     }

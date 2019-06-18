@@ -1,6 +1,7 @@
 package com.rats.controller;
 
 
+import com.rats.framework.common.base.ResponseFactory;
 import com.rats.framework.common.persistence.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import com.rats.service.DepartService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.base.BaseController;
-import com.rats.framework.common.base.ResultBean;
+import com.rats.framework.common.base.ResponseBean;
  import com.rats.framework.common.page.PageHelper;
 
 
@@ -41,10 +42,9 @@ public class DepartController extends BaseController {
      * @return
      */
     @GetMapping(value = "/depart/:id")
-    public ResultBean getById(@PathVariable Integer id ) {
-        Example example = new Example();
+    public ResponseBean<Boolean> getById(@PathVariable Integer id ) {
         Depart depart = departService.findById(id).get();
-        return successData(depart);
+        return ResponseFactory.getSuccessResult(depart);
     }
 
     /**
@@ -56,11 +56,11 @@ public class DepartController extends BaseController {
      * @return
      */
     @GetMapping(value = "/depart/list")
-    public String doList(HttpServletRequest request, HttpServletResponse response, Depart depart) {
+    public ResponseBean<Page> doList(HttpServletRequest request, HttpServletResponse response, Depart depart) {
             Pageable pageable = PageHelper.getPage(request);
             Page page = departService.findAll(depart, pageable);
-            return page.toJSONString();
-            }
+            return ResponseFactory.getSuccessResult(page);
+     }
 
     /**
      * 编辑
@@ -70,7 +70,7 @@ public class DepartController extends BaseController {
      * @return
      */
     @PutMapping(value = "/depart/:id")
-    public ResultBean doEdit(@PathVariable Integer id , Depart depart) {
+    public ResponseBean doEdit(@PathVariable Integer id , Depart depart) {
         departService.save(depart);
             return successData(null);
     }
@@ -82,7 +82,7 @@ public class DepartController extends BaseController {
      * @return
      */
     @PostMapping(value = "/depart")
-    public ResultBean doSave(Depart depart) {
+    public ResponseBean<Boolean> doSave(Depart depart) {
         departService.save(depart);
         return successData(null);
     }
@@ -96,7 +96,7 @@ public class DepartController extends BaseController {
      */
     @DeleteMapping(value = "/depart/:id")
     @ResponseBody
-    public ResultBean update(@PathVariable Integer id ) {
+    public ResponseBean update(@PathVariable Integer id ) {
         departService.deleteById(id);
         return successData(null);
     }

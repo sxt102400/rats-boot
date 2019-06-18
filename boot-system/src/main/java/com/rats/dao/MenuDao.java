@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.rats.framework.common.persistence.Example;
+import com.rats.framework.common.persistence.GeneratedExample;
 import com.rats.entity.Menu;
 import com.rats.mapper.MenuMapper;
 
@@ -42,7 +42,7 @@ public class MenuDao{
      * @param example 通用查询条件类
      * @return int 结果个数
      */
-    public long countByExample(Example example) {
+    public long countByExample(GeneratedExample example) {
         long count = this.menuMapper.countByExample(example);
         return count;
     }
@@ -54,7 +54,7 @@ public class MenuDao{
      * @param example 通用查询条件类
      * @return int  删除个数
      */
-    public int deleteByExample(Example example) {
+    public int deleteByExample(GeneratedExample example) {
         return this.menuMapper.deleteByExample(example);
     }
 
@@ -98,7 +98,7 @@ public class MenuDao{
      * @param example 通用查询条件类
      * @return List<Menu>t_sys_menu结果集
      */
-    public List<Menu> selectByExample(Example example) {
+    public List<Menu> selectByExample(GeneratedExample example) {
         return this.menuMapper.selectByExample(example);
     }
 
@@ -110,7 +110,7 @@ public class MenuDao{
      * @param pageable mybatis分页参数
      * @return List<Menu>t_sys_menu结果集[分页]
      */
-    public List<Menu> selectByExample(Example example, Pageable pageable) {
+    public List<Menu> selectByExample(GeneratedExample example, Pageable pageable) {
         return this.menuMapper.selectByExample(example, pageable);
     }
 
@@ -134,7 +134,7 @@ public class MenuDao{
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    public int updateByExample(Menu record, Example example) {
+    public int updateByExample(Menu record, GeneratedExample example) {
         return this.menuMapper.updateByExample(record, example);
     }
 
@@ -146,7 +146,7 @@ public class MenuDao{
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    public int updateByExampleSelective(Menu record, Example example) {
+    public int updateByExampleSelective(Menu record, GeneratedExample example) {
         return this.menuMapper.updateByExampleSelective(record, example);
     }
 

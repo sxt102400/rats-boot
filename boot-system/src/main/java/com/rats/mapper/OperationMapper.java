@@ -2,10 +2,11 @@ package com.rats.mapper;
 
 
 import java.util.List;
+
+import com.rats.framework.common.persistence.GeneratedExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
-import com.rats.framework.common.persistence.Example;
 import com.rats.entity.Operation;
 
 /** Copyright (C) 2013 rats
@@ -25,7 +26,7 @@ public interface OperationMapper {
      * @param example 查询条件
      * @return long 结果个数
      */
-    long countByExample(Example example);
+    long countByExample(GeneratedExample example);
 
     /**
      * Description: 根据查询条件，删除t_sys_operation中记录
@@ -33,7 +34,7 @@ public interface OperationMapper {
      * @param example 通用查询条件类
      * @return int 删除个数
      */
-    int deleteByExample(Example example);
+    int deleteByExample(GeneratedExample example);
 
     /**
      * Description: 根据主键删除t_sys_operation中记录
@@ -65,7 +66,7 @@ public interface OperationMapper {
      * @param example 查询条件
      * @return List<Operation>t_sys_operation结果集
      */
-    List<Operation> selectByExample(Example example);
+    List<Operation> selectByExample(GeneratedExample example);
 
     /**
      * OperationMapper.selectByPrimaryKey
@@ -84,7 +85,7 @@ public interface OperationMapper {
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    int updateByExampleSelective(@Param("record") Operation record, @Param("example") Example example);
+    int updateByExampleSelective(@Param("record") Operation record, @Param("example") GeneratedExample example);
 
     /**
      * OperationMapper.updateByExample
@@ -94,7 +95,7 @@ public interface OperationMapper {
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    int updateByExample(@Param("record") Operation record, @Param("example") Example example);
+    int updateByExample(@Param("record") Operation record, @Param("example") GeneratedExample example);
 
     /**
      * OperationMapper.updateByPrimaryKeySelective
@@ -121,6 +122,6 @@ public interface OperationMapper {
      * @param rowBounds mybatis分页条件
      * @return List<Operation>t_sys_operation结果集
      */
-    List<Operation> selectByExample(Example example,RowBounds rowBounds);
+    List<Operation> selectByExample(GeneratedExample example, RowBounds rowBounds);
 
 }

@@ -13,7 +13,7 @@
              id ,  role_id ,  resource_id ,  resource_type  
     </sql>
 
-    <select id="selectByExample"  parameterType="com.rats.framework.common.persistence.Example" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.rats.framework.common.persistence.GeneratedExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -42,7 +42,7 @@
 
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.rats.framework.common.persistence.Example">
+    <delete id="deleteByExample" parameterType="com.rats.framework.common.persistence.GeneratedExample">
         delete from t_sys_role_permission
         <if test="_parameter != null" >
             <include refid="common.Example_Where_Clause" />
@@ -153,7 +153,7 @@
 
 
 
-    <select id="countByExample" parameterType="com.rats.framework.common.persistence.Example" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.rats.framework.common.persistence.GeneratedExample" resultType="java.lang.Long">
         select count(*) from t_sys_role_permission
         <if test="_parameter != null">
             <include refid="common.Example_Where_Clause" />

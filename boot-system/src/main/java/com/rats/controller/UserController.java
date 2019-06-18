@@ -12,7 +12,7 @@ import com.rats.service.UserService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.base.BaseController;
-import com.rats.framework.common.base.ResultBean;
+import com.rats.framework.common.base.ResponseBean;
  import com.rats.framework.common.page.PageHelper;
 
 
@@ -40,7 +40,7 @@ public class UserController extends BaseController {
      * @return
      */
     @GetMapping(value = "/user/:id")
-    public ResultBean getById(@PathVariable String id ) {
+    public ResponseBean getById(@PathVariable String id ) {
         User user = userService.selectByPrimaryKey(id);
         return successData(user);
     }
@@ -68,7 +68,7 @@ public class UserController extends BaseController {
      * @return
      */
     @PutMapping(value = "/user/:id")
-    public ResultBean doEdit(@PathVariable String id , User user) {
+    public ResponseBean doEdit(@PathVariable String id , User user) {
         userService.updateByPrimaryKeySelective(user);
             return successData(null);
     }
@@ -80,7 +80,7 @@ public class UserController extends BaseController {
      * @return
      */
     @PostMapping(value = "/user")
-    public ResultBean doSave(User user) {
+    public ResponseBean doSave(User user) {
         userService.save(user);
         return successData(null);
     }
@@ -94,7 +94,7 @@ public class UserController extends BaseController {
      */
     @DeleteMapping(value = "/user/:id")
     @ResponseBody
-    public ResultBean update(@PathVariable String id ) {
+    public ResponseBean update(@PathVariable String id ) {
         userService.deleteByPrimaryKey(id);
         return successData(null);
     }

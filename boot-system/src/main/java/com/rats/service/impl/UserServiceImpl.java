@@ -3,6 +3,9 @@ package com.rats.service.impl;
 
 import java.util.List;
 import javax.annotation.Resource;
+
+import com.rats.framework.common.persistence.Example;
+import com.rats.framework.common.persistence.GeneratedExample;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +17,6 @@ import com.rats.service.UserService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.page.PageImpl;
-import com.rats.framework.common.persistence.Example;
 
 /** Copyright (C) 2013 rats
  *
@@ -48,7 +50,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public long count(User condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.userMapper.countByExample(example);
     }
 
@@ -61,7 +63,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int delete(User condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.userMapper.deleteByExample(example);
     }
 
@@ -109,7 +111,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<User> select(User condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.userMapper.selectByExample(example);
     }
 
@@ -118,12 +120,12 @@ public class UserServiceImpl implements UserService {
      * Description: 根据查询条件类，返回User结果集 [分页]
      *
      * @param condition User参数，查询条件
-     * @param page Page参数，分页条件
+     * @param pageable Page参数，分页条件
      * @return Page<User> User结果集
      */
     @Override
     public Page<User> selectPage(User condition, Pageable pageable) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         RowBounds rowBounds = new RowBounds( (int)(pageable.getOffset()), (int)(pageable.getLimit()));
         long totalCount = userMapper.countByExample(example);
         List<User> data = userMapper.selectByExample(example, rowBounds);
@@ -155,7 +157,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int update(User update, User  condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.userMapper.updateByExample(update, example);
     }
 
@@ -169,7 +171,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int updateSelective(User update, User  condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.userMapper.updateByExampleSelective(update, example);
     }
 

@@ -3,12 +3,13 @@ package com.rats.dao;
 
 import java.util.List;
 import javax.annotation.Resource;
+
+import com.rats.framework.common.persistence.GeneratedExample;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.rats.framework.common.persistence.Example;
 import com.rats.entity.User;
 import com.rats.mapper.UserMapper;
 
@@ -41,7 +42,7 @@ public class UserDao{
      * @param example 通用查询条件类
      * @return int 结果个数
      */
-    public long countByExample(Example example) {
+    public long countByExample(GeneratedExample example) {
         long count = this.userMapper.countByExample(example);
         return count;
     }
@@ -53,7 +54,7 @@ public class UserDao{
      * @param example 通用查询条件类
      * @return int  删除个数
      */
-    public int deleteByExample(Example example) {
+    public int deleteByExample(GeneratedExample example) {
         return this.userMapper.deleteByExample(example);
     }
 
@@ -97,7 +98,7 @@ public class UserDao{
      * @param example 通用查询条件类
      * @return List<User>t_sys_user结果集
      */
-    public List<User> selectByExample(Example example) {
+    public List<User> selectByExample(GeneratedExample example) {
         return this.userMapper.selectByExample(example);
     }
 
@@ -109,7 +110,7 @@ public class UserDao{
      * @param rowBounds mybatis分页参数
      * @return List<User>t_sys_user结果集[分页]
      */
-    public List<User> selectByExample(Example example, RowBounds rowBounds) {
+    public List<User> selectByExample(GeneratedExample example, RowBounds rowBounds) {
         return this.userMapper.selectByExample(example, rowBounds);
     }
 
@@ -133,7 +134,7 @@ public class UserDao{
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    public int updateByExample(User record, Example example) {
+    public int updateByExample(User record, GeneratedExample example) {
         return this.userMapper.updateByExample(record, example);
     }
 
@@ -145,7 +146,7 @@ public class UserDao{
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    public int updateByExampleSelective(User record, Example example) {
+    public int updateByExampleSelective(User record, GeneratedExample example) {
         return this.userMapper.updateByExampleSelective(record, example);
     }
 

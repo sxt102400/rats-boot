@@ -3,12 +3,13 @@ package com.rats.dao;
 
 import java.util.List;
 import javax.annotation.Resource;
+
+import com.rats.framework.common.persistence.GeneratedExample;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.rats.framework.common.persistence.Example;
 import com.rats.entity.Role;
 import com.rats.mapper.RoleMapper;
 
@@ -41,7 +42,7 @@ public class RoleDao{
      * @param example 通用查询条件类
      * @return int 结果个数
      */
-    public long countByExample(Example example) {
+    public long countByExample(GeneratedExample example) {
         long count = this.roleMapper.countByExample(example);
         return count;
     }
@@ -53,7 +54,7 @@ public class RoleDao{
      * @param example 通用查询条件类
      * @return int  删除个数
      */
-    public int deleteByExample(Example example) {
+    public int deleteByExample(GeneratedExample example) {
         return this.roleMapper.deleteByExample(example);
     }
 
@@ -97,7 +98,7 @@ public class RoleDao{
      * @param example 通用查询条件类
      * @return List<Role>t_sys_role结果集
      */
-    public List<Role> selectByExample(Example example) {
+    public List<Role> selectByExample(GeneratedExample example) {
         return this.roleMapper.selectByExample(example);
     }
 
@@ -109,7 +110,7 @@ public class RoleDao{
      * @param rowBounds mybatis分页参数
      * @return List<Role>t_sys_role结果集[分页]
      */
-    public List<Role> selectByExample(Example example, RowBounds rowBounds) {
+    public List<Role> selectByExample(GeneratedExample example, RowBounds rowBounds) {
         return this.roleMapper.selectByExample(example, rowBounds);
     }
 
@@ -133,7 +134,7 @@ public class RoleDao{
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    public int updateByExample(Role record, Example example) {
+    public int updateByExample(Role record, GeneratedExample example) {
         return this.roleMapper.updateByExample(record, example);
     }
 
@@ -145,7 +146,7 @@ public class RoleDao{
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    public int updateByExampleSelective(Role record, Example example) {
+    public int updateByExampleSelective(Role record, GeneratedExample example) {
         return this.roleMapper.updateByExampleSelective(record, example);
     }
 

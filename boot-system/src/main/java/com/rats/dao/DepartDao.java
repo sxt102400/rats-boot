@@ -5,12 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.rats.framework.common.page.Pageable;
-import org.apache.ibatis.session.RowBounds;
+import com.rats.framework.common.persistence.GeneratedExample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.rats.framework.common.persistence.Example;
 import com.rats.entity.Depart;
 import com.rats.mapper.DepartMapper;
 
@@ -43,7 +42,7 @@ public class DepartDao{
      * @param example 通用查询条件类
      * @return int 结果个数
      */
-    public long countByExample(Example example) {
+    public long countByExample(GeneratedExample example) {
         long count = this.departMapper.countByExample(example);
         return count;
     }
@@ -55,7 +54,7 @@ public class DepartDao{
      * @param example 通用查询条件类
      * @return int  删除个数
      */
-    public int deleteByExample(Example example) {
+    public int deleteByExample(GeneratedExample example) {
         return this.departMapper.deleteByExample(example);
     }
 
@@ -99,7 +98,7 @@ public class DepartDao{
      * @param example 通用查询条件类
      * @return List<Depart>t_sys_depart结果集
      */
-    public List<Depart> selectByExample(Example example) {
+    public List<Depart> selectByExample(GeneratedExample example) {
         return this.departMapper.selectByExample(example);
     }
 
@@ -111,7 +110,7 @@ public class DepartDao{
      * @param pageable mybatis分页参数
      * @return List<Depart>t_sys_depart结果集[分页]
      */
-    public List<Depart> selectByExample(Example example, Pageable pageable) {
+    public List<Depart> selectByExample(GeneratedExample example, Pageable pageable) {
         return this.departMapper.selectByExample(example, pageable);
     }
 
@@ -135,7 +134,7 @@ public class DepartDao{
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    public int updateByExample(Depart record, Example example) {
+    public int updateByExample(Depart record, GeneratedExample example) {
         return this.departMapper.updateByExample(record, example);
     }
 
@@ -147,7 +146,7 @@ public class DepartDao{
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    public int updateByExampleSelective(Depart record, Example example) {
+    public int updateByExampleSelective(Depart record, GeneratedExample example) {
         return this.departMapper.updateByExampleSelective(record, example);
     }
 

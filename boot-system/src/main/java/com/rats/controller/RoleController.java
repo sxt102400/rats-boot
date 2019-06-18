@@ -12,7 +12,7 @@ import com.rats.service.RoleService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.base.BaseController;
-import com.rats.framework.common.base.ResultBean;
+import com.rats.framework.common.base.ResponseBean;
  import com.rats.framework.common.page.PageHelper;
 
 
@@ -40,7 +40,7 @@ public class RoleController extends BaseController {
      * @return
      */
     @GetMapping(value = "/role/:id")
-    public ResultBean getById(@PathVariable String id ) {
+    public ResponseBean getById(@PathVariable String id ) {
         Role role = roleService.selectByPrimaryKey(id);
         return successData(role);
     }
@@ -58,7 +58,7 @@ public class RoleController extends BaseController {
             Pageable pageable = PageHelper.getPage(request);
             Page page = roleService.selectPage(role, pageable);
             return page.toJSONString();
-            }
+     }
 
     /**
      * 编辑
@@ -68,7 +68,7 @@ public class RoleController extends BaseController {
      * @return
      */
     @PutMapping(value = "/role/:id")
-    public ResultBean doEdit(@PathVariable String id , Role role) {
+    public ResponseBean doEdit(@PathVariable String id , Role role) {
         roleService.updateByPrimaryKeySelective(role);
             return successData(null);
     }
@@ -80,7 +80,7 @@ public class RoleController extends BaseController {
      * @return
      */
     @PostMapping(value = "/role")
-    public ResultBean doSave(Role role) {
+    public ResponseBean doSave(Role role) {
         roleService.save(role);
         return successData(null);
     }
@@ -94,7 +94,7 @@ public class RoleController extends BaseController {
      */
     @DeleteMapping(value = "/role/:id")
     @ResponseBody
-    public ResultBean update(@PathVariable String id ) {
+    public ResponseBean update(@PathVariable String id ) {
         roleService.deleteByPrimaryKey(id);
         return successData(null);
     }

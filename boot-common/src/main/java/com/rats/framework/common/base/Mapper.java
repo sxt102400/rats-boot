@@ -2,7 +2,7 @@ package com.rats.framework.common.base;
 
 
 import com.rats.framework.common.page.Pageable;
-import com.rats.framework.common.persistence.Example;
+import com.rats.framework.common.persistence.GeneratedExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public interface Mapper<T,ID>  {
      * @param example 通用查询条件类
      * @return int 结果个数
      */
-    long countByExample(Example example);
+    long countByExample(GeneratedExample example);
 
     /**
      * MenuMapper.countByExample
@@ -37,7 +37,7 @@ public interface Mapper<T,ID>  {
      * @param example 通用查询条件类
      * @return int 删除个数
      */
-    int deleteByExample(Example example);
+    int deleteByExample(GeneratedExample example);
 
     /**
      * MenuMapper.deleteByPrimaryKey
@@ -73,7 +73,7 @@ public interface Mapper<T,ID>  {
      * @param example 通用查询条件类
      * @return List<Menu>icy_menu结果集
      */
-    <S extends T>  List<S> selectByExample(Example example);
+    <S extends T>  List<S> selectByExample(GeneratedExample example);
 
     /**
      * MenuMapper.selectByExample
@@ -83,7 +83,7 @@ public interface Mapper<T,ID>  {
      * @param pageable mybatis分页条件
      * @return List<Menu>icy_menu结果集
      */
-    List<T> selectByExample(Example example, Pageable pageable);
+    List<T> selectByExample(GeneratedExample example, Pageable pageable);
 
     /**
      * MenuMapper.selectByPrimaryKey
@@ -102,7 +102,7 @@ public interface Mapper<T,ID>  {
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    int updateByExampleSelective(@Param("record") T record, @Param("example") Example example);
+    int updateByExampleSelective(@Param("record") T record, @Param("example") GeneratedExample example);
 
     /**
      * MenuMapper.updateByExample
@@ -112,7 +112,7 @@ public interface Mapper<T,ID>  {
      * @param example 更新记录的查询条件
      * @return int 更新记录数
      */
-    int updateByExample(@Param("record") T record, @Param("example") Example example);
+    int updateByExample(@Param("record") T record, @Param("example") GeneratedExample example);
 
     /**
      * MenuMapper.updateByPrimaryKeySelective

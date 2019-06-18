@@ -3,9 +3,8 @@ package com.rats.framework.common.base;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.persistence.Example;
-import com.rats.framework.common.persistence.WeekendExample;
+import com.rats.framework.common.persistence.GeneratedExample;
 
-import javax.persistence.EntityManager;
 import java.util.Optional;
 
 public interface BaseService<T, ID> {
@@ -27,8 +26,7 @@ public interface BaseService<T, ID> {
 
     void deleteInBatch(Iterable<T> entities);
 
-
-    boolean exists(WeekendExample<T> example);
+    boolean exists(Example<T> example);
 
     boolean exists(T entity);
 
@@ -40,17 +38,17 @@ public interface BaseService<T, ID> {
 
     <S extends T> Iterable<S> findAll(S entity);
 
-    <S extends T> Iterable<S> findAll(WeekendExample<S> example);
+    <S extends T> Iterable<S> findAll(Example<S> example);
 
     <S extends T> Page<S> findAll(S entity, Pageable pageable);
 
-    <S extends T> Page<S> findAll(WeekendExample<S> example, Pageable pageable);
+    <S extends T> Page<S> findAll(Example<S> example, Pageable pageable);
 
     Iterable<T>  findAllById(Iterable<ID> ids);
 
     Optional<T> findById(ID id);
 
-    <S extends T> Optional<S> findOne(Example<S> example);
+    <S extends T> Optional<S> findOne(GeneratedExample<S> example);
 
     /**
      *  save =  insert or  update
@@ -66,7 +64,7 @@ public interface BaseService<T, ID> {
 
     <S extends T> S update(S entity,S condition);
 
-    <S extends T> S update(S entity,WeekendExample<S> example);
+    <S extends T> S update(S entity,Example<S> example);
 
     <S extends T> Iterable<S> saveAll(Iterable<S> entities);
 

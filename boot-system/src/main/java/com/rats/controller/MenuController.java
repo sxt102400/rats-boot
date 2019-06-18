@@ -5,14 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.rats.entity.Menu;
 import com.rats.service.MenuService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.base.BaseController;
-import com.rats.framework.common.base.ResultBean;
+import com.rats.framework.common.base.ResponseBean;
  import com.rats.framework.common.page.PageHelper;
 
 
@@ -40,7 +39,7 @@ public class MenuController extends BaseController {
      * @return
      */
     @GetMapping(value = "/menu/:id")
-    public ResultBean getById(@PathVariable Integer id ) {
+    public ResponseBean getById(@PathVariable Integer id ) {
         Menu menu = menuService.findById(id).get();
         return successData(menu);
     }
@@ -71,7 +70,7 @@ public class MenuController extends BaseController {
      * @return
      */
     @PutMapping(value = "/menu/:id")
-    public ResultBean doEdit(@PathVariable Integer id , Menu menu) {
+    public ResponseBean doEdit(@PathVariable Integer id , Menu menu) {
         menuService.save(menu);
         return successData(null);
     }
@@ -83,7 +82,7 @@ public class MenuController extends BaseController {
      * @return
      */
     @PostMapping(value = "/menu")
-    public ResultBean doSave(Menu menu) {
+    public ResponseBean doSave(Menu menu) {
         menuService.save(menu);
         return successData(null);
     }
@@ -97,7 +96,7 @@ public class MenuController extends BaseController {
      */
     @DeleteMapping(value = "/menu/:id")
     @ResponseBody
-    public ResultBean update(@PathVariable Integer id ) {
+    public ResponseBean update(@PathVariable Integer id ) {
         menuService.deleteById(id);
         return successData(null);
     }

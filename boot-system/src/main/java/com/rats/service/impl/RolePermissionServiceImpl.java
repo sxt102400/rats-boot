@@ -3,6 +3,9 @@ package com.rats.service.impl;
 
 import java.util.List;
 import javax.annotation.Resource;
+
+import com.rats.framework.common.persistence.Example;
+import com.rats.framework.common.persistence.GeneratedExample;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +17,6 @@ import com.rats.service.RolePermissionService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.page.PageImpl;
-import com.rats.framework.common.persistence.Example;
 
 /** Copyright (C) 2013 rats
  *
@@ -48,7 +50,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
      */
     @Override
     public long count(RolePermission condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.rolePermissionMapper.countByExample(example);
     }
 
@@ -61,7 +63,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
      */
     @Override
     public int delete(RolePermission condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.rolePermissionMapper.deleteByExample(example);
     }
 
@@ -109,7 +111,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
      */
     @Override
     public List<RolePermission> select(RolePermission condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.rolePermissionMapper.selectByExample(example);
     }
 
@@ -118,12 +120,12 @@ public class RolePermissionServiceImpl implements RolePermissionService {
      * Description: 根据查询条件类，返回RolePermission结果集 [分页]
      *
      * @param condition RolePermission参数，查询条件
-     * @param page Page参数，分页条件
+     * @param pageable Page参数，分页条件
      * @return Page<RolePermission> RolePermission结果集
      */
     @Override
     public Page<RolePermission> selectPage(RolePermission condition, Pageable pageable) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         RowBounds rowBounds = new RowBounds( (int)(pageable.getOffset()), (int)(pageable.getLimit()));
         long totalCount = rolePermissionMapper.countByExample(example);
         List<RolePermission> data = rolePermissionMapper.selectByExample(example, rowBounds);
@@ -155,7 +157,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
      */
     @Override
     public int update(RolePermission update, RolePermission  condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.rolePermissionMapper.updateByExample(update, example);
     }
 
@@ -169,7 +171,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
      */
     @Override
     public int updateSelective(RolePermission update, RolePermission  condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.rolePermissionMapper.updateByExampleSelective(update, example);
     }
 
@@ -197,21 +199,20 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         return this.rolePermissionMapper.updateByPrimaryKeySelective(rolePermission );
     }
 
-
     public Example buildExample(RolePermission condition){
-        Example example = new Example();
-        Example.Criteria criteria = example.createCriteria();
+        Example<RolePermission> example = new Example();
+        Example.Criteria<RolePermission> criteria = example.createCriteria();
         if (condition.getId() != null) {
-            criteria.andEqualTo( "id",condition.getId() );
+            criteria.andEqualTo( RolePermission::getId,condition.getId() );
         }
         if (condition.getRoleId() != null) {
-            criteria.andEqualTo( "role_id",condition.getRoleId() );
+            criteria.andEqualTo( RolePermission::getRoleId,condition.getRoleId() );
         }
         if (condition.getResourceId() != null) {
-            criteria.andEqualTo( "resource_id",condition.getResourceId() );
+            criteria.andEqualTo( RolePermission::getResourceId,condition.getResourceId() );
         }
         if (condition.getResourceType() != null) {
-            criteria.andEqualTo( "resource_type",condition.getResourceType() );
+            criteria.andEqualTo( RolePermission::getResourceType,condition.getResourceType() );
         }
         return example;
     }

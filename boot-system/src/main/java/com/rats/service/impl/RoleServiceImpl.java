@@ -3,6 +3,9 @@ package com.rats.service.impl;
 
 import java.util.List;
 import javax.annotation.Resource;
+
+import com.rats.framework.common.persistence.Example;
+import com.rats.framework.common.persistence.GeneratedExample;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +17,6 @@ import com.rats.service.RoleService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.page.PageImpl;
-import com.rats.framework.common.persistence.Example;
 
 /** Copyright (C) 2013 rats
  *
@@ -48,7 +50,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public long count(Role condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.roleMapper.countByExample(example);
     }
 
@@ -61,7 +63,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public int delete(Role condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.roleMapper.deleteByExample(example);
     }
 
@@ -155,7 +157,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public int update(Role update, Role  condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.roleMapper.updateByExample(update, example);
     }
 
@@ -169,7 +171,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public int updateSelective(Role update, Role  condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.roleMapper.updateByExampleSelective(update, example);
     }
 

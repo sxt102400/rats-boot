@@ -5,16 +5,16 @@ package com.rats.framework.common.base;
  */
 public abstract class BaseController{
 
-    public ResultBean successData(Object content) {
-        ResultBean bean = new ResultBean();
+    public ResponseBean successData(Object content) {
+        ResponseBean bean = new ResponseBean();
         bean.setCode(0);
         bean.setMsg("success");
         bean.setData(content);
         return bean;
     }
 
-    public ResultBean failData(Object content) {
-        ResultBean bean = new ResultBean();
+    public ResponseBean failData(Object content) {
+        ResponseBean bean = new ResponseBean();
         bean.setCode(-1);
         bean.setMsg("fail");
         bean.setData(content);

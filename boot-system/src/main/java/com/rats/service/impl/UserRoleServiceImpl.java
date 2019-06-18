@@ -3,6 +3,9 @@ package com.rats.service.impl;
 
 import java.util.List;
 import javax.annotation.Resource;
+
+import com.rats.framework.common.persistence.Example;
+import com.rats.framework.common.persistence.GeneratedExample;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +17,6 @@ import com.rats.service.UserRoleService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.page.PageImpl;
-import com.rats.framework.common.persistence.Example;
 
 /** Copyright (C) 2013 rats
  *
@@ -48,7 +50,7 @@ public class UserRoleServiceImpl implements UserRoleService {
      */
     @Override
     public long count(UserRole condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.userRoleMapper.countByExample(example);
     }
 
@@ -61,7 +63,7 @@ public class UserRoleServiceImpl implements UserRoleService {
      */
     @Override
     public int delete(UserRole condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.userRoleMapper.deleteByExample(example);
     }
 
@@ -109,7 +111,7 @@ public class UserRoleServiceImpl implements UserRoleService {
      */
     @Override
     public List<UserRole> select(UserRole condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.userRoleMapper.selectByExample(example);
     }
 
@@ -123,7 +125,7 @@ public class UserRoleServiceImpl implements UserRoleService {
      */
     @Override
     public Page<UserRole> selectPage(UserRole condition, Pageable pageable) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         RowBounds rowBounds = new RowBounds( (int)(pageable.getOffset()), (int)(pageable.getLimit()));
         long totalCount = userRoleMapper.countByExample(example);
         List<UserRole> data = userRoleMapper.selectByExample(example, rowBounds);
@@ -155,7 +157,7 @@ public class UserRoleServiceImpl implements UserRoleService {
      */
     @Override
     public int update(UserRole update, UserRole  condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.userRoleMapper.updateByExample(update, example);
     }
 
@@ -169,7 +171,7 @@ public class UserRoleServiceImpl implements UserRoleService {
      */
     @Override
     public int updateSelective(UserRole update, UserRole  condition ) {
-        Example example = buildExample(condition);
+        GeneratedExample example = buildExample(condition);
         return this.userRoleMapper.updateByExampleSelective(update, example);
     }
 

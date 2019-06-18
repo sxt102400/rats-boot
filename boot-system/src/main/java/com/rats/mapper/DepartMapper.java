@@ -1,12 +1,8 @@
 package com.rats.mapper;
 
 
-import java.util.List;
-
 import com.rats.framework.common.base.Mapper;
-import org.apache.ibatis.session.RowBounds;
 
-import com.rats.framework.common.persistence.Example;
 import com.rats.entity.Depart;
 
 /** Copyright (C) 2013 rats

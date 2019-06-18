@@ -12,7 +12,7 @@ import com.rats.service.OperationService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.base.BaseController;
-import com.rats.framework.common.base.ResultBean;
+import com.rats.framework.common.base.ResponseBean;
  import com.rats.framework.common.page.PageHelper;
 
 
@@ -40,7 +40,7 @@ public class OperationController extends BaseController {
      * @return
      */
     @GetMapping(value = "/operation/:id")
-    public ResultBean getById(@PathVariable Integer id ) {
+    public ResponseBean getById(@PathVariable Integer id ) {
         Operation operation = operationService.selectByPrimaryKey(id);
         return successData(operation);
     }
@@ -68,7 +68,7 @@ public class OperationController extends BaseController {
      * @return
      */
     @PutMapping(value = "/operation/:id")
-    public ResultBean doEdit(@PathVariable Integer id , Operation operation) {
+    public ResponseBean doEdit(@PathVariable Integer id , Operation operation) {
         operationService.updateByPrimaryKeySelective(operation);
             return successData(null);
     }
@@ -80,7 +80,7 @@ public class OperationController extends BaseController {
      * @return
      */
     @PostMapping(value = "/operation")
-    public ResultBean doSave(Operation operation) {
+    public ResponseBean doSave(Operation operation) {
         operationService.save(operation);
         return successData(null);
     }
@@ -94,7 +94,7 @@ public class OperationController extends BaseController {
      */
     @DeleteMapping(value = "/operation/:id")
     @ResponseBody
-    public ResultBean update(@PathVariable Integer id ) {
+    public ResponseBean update(@PathVariable Integer id ) {
         operationService.deleteByPrimaryKey(id);
         return successData(null);
     }

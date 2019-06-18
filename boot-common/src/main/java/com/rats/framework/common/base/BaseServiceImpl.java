@@ -4,8 +4,7 @@ import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.PageImpl;
 import com.rats.framework.common.page.Pageable;
 import com.rats.framework.common.persistence.Example;
-import com.rats.framework.common.persistence.WeekendExample;
-import org.apache.commons.lang3.StringUtils;
+import com.rats.framework.common.persistence.GeneratedExample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +15,6 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -62,13 +60,13 @@ public abstract class BaseServiceImpl<T, ID> extends ClassTypeAdapt<T> implement
 
     @Override
     public long count(T entity) {
-        Example example = buildExample(entity);
+        GeneratedExample example = buildExample(entity);
         return this.getMapper().countByExample(example);
     }
 
     @Override
     public void delete(T entity) {
-        Example example = buildExample(entity);
+        GeneratedExample example = buildExample(entity);
         this.getMapper().deleteByExample(example);
     }
 
@@ -80,7 +78,7 @@ public abstract class BaseServiceImpl<T, ID> extends ClassTypeAdapt<T> implement
     @Override
     public void deleteAll(Iterable<? extends T> entities) {
         entities.forEach(entity -> {
-            Example example = buildExample(entity);
+            GeneratedExample example = buildExample(entity);
             this.getMapper().deleteByExample(example);
         });
     }
@@ -101,13 +99,13 @@ public abstract class BaseServiceImpl<T, ID> extends ClassTypeAdapt<T> implement
     }
 
     @Override
-    public boolean exists(WeekendExample<T> example) {
+    public boolean exists(Example<T> example) {
         return false;
     }
 
     @Override
     public boolean exists(T entity) {
-        Example example = buildExample(entity);
+        GeneratedExample example = buildExample(entity);
         return this.getMapper().countByExample(example) > 0;
     }
 
@@ -123,24 +121,24 @@ public abstract class BaseServiceImpl<T, ID> extends ClassTypeAdapt<T> implement
 
     @Override
     public <S extends T> Iterable<S> findAll(S entity) {
-        Example example = this.buildExample(entity);
+        GeneratedExample example = this.buildExample(entity);
         return this.getMapper().selectByExample(example);
     }
 
     @Override
-    public <S extends T> Iterable<S> findAll(WeekendExample<S> example) {
+    public <S extends T> Iterable<S> findAll(Example<S> example) {
         return this.getMapper().selectByExample(example);
     }
 
     @Override
     public <S extends T> Page<S> findAll(S entity, Pageable pageable) {
-        Example example = this.buildExample(entity);
+        GeneratedExample example = this.buildExample(entity);
         List data = this.getMapper().selectByExample(example, pageable);
         return new PageImpl(data, pageable);
     }
 
     @Override
-    public <S extends T> Page<S> findAll(WeekendExample<S> example, Pageable pageable) {
+    public <S extends T> Page<S> findAll(Example<S> example, Pageable pageable) {
         List<T> data = getMapper().selectByExample(example, pageable);
         return new PageImpl(data, pageable);
     }
@@ -165,7 +163,7 @@ public abstract class BaseServiceImpl<T, ID> extends ClassTypeAdapt<T> implement
     }
 
     @Override
-    public <S extends T> Optional<S> findOne(Example<S> example) {
+    public <S extends T> Optional<S> findOne(GeneratedExample<S> example) {
         List<S> data = getMapper().selectByExample(example);
         if (data != null && data.get(0) != null) {
             return Optional.of(data.get(0));
@@ -187,13 +185,13 @@ public abstract class BaseServiceImpl<T, ID> extends ClassTypeAdapt<T> implement
 
     @Override
     public <S extends T> S update(S entity, S condition) {
-        Example example = this.buildExample(entity);
+        GeneratedExample example = this.buildExample(entity);
         this.getMapper().updateByExample(entity, example);
         return entity;
     }
 
     @Override
-    public <S extends T> S update(S entity, WeekendExample<S> example) {
+    public <S extends T> S update(S entity, Example<S> example) {
         this.getMapper().updateByExample(entity, example);
         return entity;
     }
