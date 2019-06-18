@@ -1,6 +1,7 @@
 package com.rats.controller;
 
 
+import com.rats.framework.common.base.ResponseFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,14 +53,15 @@ public class MenuController extends BaseController {
      * @return
      */
     @GetMapping(value = "/menu/list")
-    public String doList(HttpServletRequest request,  Menu menu) {
+    public ResponseBean doList(HttpServletRequest request,  Menu menu) {
             Pageable pageable = PageHelper.getPage(request);
+
             Menu query = new Menu();
             query.setName("首页");
             query.setSort(2);
             query.setState("0");
-            Page page = menuService.findAll(query, pageable);
-            return page.toJSONString();
+            Page<Menu> page = menuService.findAll(query, pageable);
+            return ResponseFactory.getSuccessResult(page);
      }
 
     /**
