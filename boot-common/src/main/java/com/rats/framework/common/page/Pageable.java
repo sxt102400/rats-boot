@@ -22,6 +22,8 @@ import java.util.*;
  */
 public abstract class Pageable extends RowBounds   {
 
+    public static final int DEFAULT_PAGE_SIZE = 10;
+
     public abstract int getPageNo();
 
     public abstract int getPageSize();
@@ -29,5 +31,13 @@ public abstract class Pageable extends RowBounds   {
     public abstract long getTotalCount();
 
     public abstract void setTotalCount(long totalCount);
+
+    public static PageRequest of(int page) {
+        return new  PageRequest(page, DEFAULT_PAGE_SIZE);
+    }
+
+    public static PageRequest of(int page, int size) {
+        return new  PageRequest(page, size);
+    }
 
 }

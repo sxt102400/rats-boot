@@ -34,9 +34,9 @@ public class DepartServiceImpl extends BaseServiceImpl<Depart, Integer> implemen
         return departMapper;
     }
 
-    public GeneratedExample buildExample(Depart condition) {
+    public Example buildExample(Depart condition) {
         Example<Depart> example = new Example<>();
-        WeekendCriteria<Depart> criteria = example.createCriteria();
+        Example.Criteria<Depart> criteria = example.createCriteria();
         if (condition.getId() != null) {
             criteria.andEqualTo(Depart::getId, condition.getId());
         }
