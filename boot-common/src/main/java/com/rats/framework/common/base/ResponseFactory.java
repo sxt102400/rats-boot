@@ -2,7 +2,7 @@ package com.rats.framework.common.base;
 
 import java.io.Serializable;
 
-public class ResponseFactory implements Serializable {
+public abstract class ResponseFactory implements Serializable {
     /**
      * Field serialVersionUID
      */
@@ -12,7 +12,7 @@ public class ResponseFactory implements Serializable {
     public static ResponseBean getSuccessResult(Object data) {
         ResponseBean bean = new ResponseBean<>();
         bean.setCode(ResponseBean.SUCCESS);
-        bean.setMsg(ResponseBean.RESULT_SUCCESS);
+        bean.setMessage(ResponseBean.RESULT_SUCCESS);
         bean.setData(data);
         return bean;
     }

@@ -8,9 +8,16 @@ package com.rats.framework.common.utils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.xml.ResourceEntityResolver;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ConfigurableApplicationContext;
+
+import java.io.IOException;
 
 /**
  * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候取出ApplicaitonContext.
@@ -30,6 +37,10 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	public static ApplicationContext getApplicationContext() {
 		assertContextInjected();
 		return applicationContext;
+	}
+
+	public static String[] getBeanDefinitionNames() {
+		return getApplicationContext().getBeanDefinitionNames();
 	}
 
 	/**
@@ -70,6 +81,28 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 		}
 
 		SpringContextHolder.applicationContext = applicationContext; // NOSONAR
+	}
+
+
+	/**
+	 * 从指定的配置文件中加载Bean到ApplicationContext
+	 * @param configLocationString 指定配置文件路径
+	 */
+	public static void loadBean(final String configLocationString) {
+		final ConfigurableApplicationContext ctx = (ConfigurableApplicationContext) getApplicationContext();
+		final XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader((BeanDefinitionRegistry) ctx.getBeanFactory());
+		beanDefinitionReader.setResourceLoader(getApplicationContext());
+		beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(getApplicationContext()));
+		try {
+			final String[] configLocations = new String[] { configLocationString };
+			for (final String configLocation : configLocations) {
+				beanDefinitionReader.loadBeanDefinitions(getApplicationContext().getResources(configLocation));
+			}
+		} catch (final BeansException e) {
+			throw new RuntimeException(e);
+		} catch (final IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**

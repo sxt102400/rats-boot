@@ -8,7 +8,7 @@ public abstract class BaseController{
     public ResponseBean successData(Object content) {
         ResponseBean bean = new ResponseBean();
         bean.setCode(0);
-        bean.setMsg("success");
+        bean.setMessage("success");
         bean.setData(content);
         return bean;
     }
@@ -16,7 +16,7 @@ public abstract class BaseController{
     public ResponseBean failData(Object content) {
         ResponseBean bean = new ResponseBean();
         bean.setCode(-1);
-        bean.setMsg("fail");
+        bean.setMessage("fail");
         bean.setData(content);
         return bean;
     }

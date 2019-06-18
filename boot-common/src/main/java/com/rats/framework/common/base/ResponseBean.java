@@ -28,20 +28,20 @@ public class ResponseBean<T> implements Serializable {
         this.code = FAIL;
     }
 
-    public String getMsg() {
-        return message;
-    }
-
-    public void setMsg(String msg) {
-        this.message = msg;
-    }
-
     public int getCode() {
         return code;
     }
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public T getData() {
@@ -51,5 +51,4 @@ public class ResponseBean<T> implements Serializable {
     public void setData(T data) {
         this.data = data;
     }
-
 }
