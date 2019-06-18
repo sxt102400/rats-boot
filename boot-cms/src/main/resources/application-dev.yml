@@ -1,0 +1,66 @@
+
+# server配置
+server:
+  port: 18080
+  servlet:
+    context-path: /cms
+
+# spring配置
+spring:
+  # session
+  session:
+    store-type: none
+  # 数据库配置
+  datasource:
+    # 数据库连接配置
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/rats_cms?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: rats
+    password: 123456
+    # 下面为连接池的补充设置，应用到上面所有数据源中
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 配置监控统计拦截的filters
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    logSlowSql: true
+  # 模板配置
+  thymeleaf:
+    cache: false
+    # 这个是配置模板路径的，默认就是templates，可不用配置
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+  # json
+  jackson:
+      default-property-inclusion: non_null
+
+# mybatis配置
+mybatis:
+  mapperLocations: classpath*:com/rats/mapper/**/*.xml
+  typeAliasesPackage: com.rats.mapper
+
+# logback配置
+logging:
+  path: logs/
+  file: app-log.log
+  level:
+    # 配置root日志级别
+    root: INFO
+    # 配置spring web日志级别
+    java.sql.Connection: DEBUG
+    java.sql.Statement: DEBUG
+    java.sql.PreparedStatement: DEBUG
+    org.springframework.web: DEBUG
+    com.rats: DEBUG
+
+
