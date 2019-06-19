@@ -1,5 +1,6 @@
 package com.rats.framework.common.base;
 
+import com.rats.framework.common.anno.WithMapper;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.PageImpl;
 import com.rats.framework.common.page.Pageable;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +29,16 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> extends ClassT
 
     public abstract BaseMapper<T, ID> getMapper();
 
+    public  void ma(){
+
+        Annotation anno = this.getClass().getAnnotation(WithMapper.class);
+        ((WithMapper) anno).bean();
+        System.out.print(anno.toString());
+    }
+
     public Example buildExample(T condition) {
+
+        this.getClassType().getAnnotation(WithMapper.class);
         Example example = new Example();
         Example.Criteria criteria = example.createCriteria();
         Field[] fileds = getClassType().getDeclaredFields();
@@ -172,11 +183,7 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> extends ClassT
         return Optional.empty();
     }
 
-    @Override
-    public <S extends T> S insert(S entity) {
-        this.getMapper().insert(entity);
-        return entity;
-    }
+
 
     @Override
     public <S extends T> S update(S entity) {
@@ -184,12 +191,7 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> extends ClassT
         return entity;
     }
 
-    @Override
-    public <S extends T> S update(S entity, S condition) {
-        GeneratedExample example = this.buildExample(entity);
-        this.getMapper().updateByExample(entity, example);
-        return entity;
-    }
+
 
     @Override
     public <S extends T> S update(S entity, Example<S> example) {

@@ -1,8 +1,8 @@
 package com.rats.service.impl;
 
 
-import javax.annotation.Resource;
 
+import com.rats.framework.common.anno.WithMapper;
 import com.rats.framework.common.base.BaseServiceImpl;
 import com.rats.framework.common.base.BaseMapper;
 import com.rats.framework.common.persistence.Example;
@@ -23,14 +23,17 @@ import com.rats.service.DepartService;
  * @since :
  */
 @Service(value = "departService")
+@WithMapper(value = DepartMapper.class)
 public class DepartServiceImpl extends BaseServiceImpl<Depart, Integer> implements DepartService {
 
-    @Resource
-    private DepartMapper departMapper;
+    public static void main(String[] args) {
+        DepartServiceImpl dd = new DepartServiceImpl();
+        dd.ma();
+    }
 
     @Override
     public BaseMapper<Depart, Integer> getMapper() {
-        return departMapper;
+        return null;
     }
 
     public Example buildExample(Depart condition) {
@@ -91,6 +94,16 @@ public class DepartServiceImpl extends BaseServiceImpl<Depart, Integer> implemen
             criteria.andEqualTo(Depart::getState, condition.getState());
         }
         return example;
+    }
+
+    @Override
+    public <S extends Depart> S saveOrUpdate(S entity) {
+        return null;
+    }
+
+    @Override
+    public <S extends Depart> Iterable<S> saveAllInBatch(Iterable<S> entities) {
+        return null;
     }
 }
 

@@ -3,6 +3,7 @@ package com.rats.service.impl;
 
 import javax.annotation.Resource;
 
+import com.rats.framework.common.anno.WithMapper;
 import com.rats.framework.common.base.BaseServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,8 @@ import com.rats.service.MenuService;
  * @since : 
  */
 @Service(value = "menuService")
-public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer> implements MenuService  {
+@WithMapper(MenuMapper.class)
+public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer> implements MenuService {
 
     /**
      * Field LOGGER : 日志操作类
@@ -36,6 +38,18 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer> implements Me
     public MenuMapper getMapper() {
         return menuMapper;
     }
+
+    @Override
+    public <S extends Menu> S saveOrUpdate(S entity) {
+        return null;
+    }
+
+    @Override
+    public <S extends Menu> Iterable<S> saveAllInBatch(Iterable<S> entities) {
+        return null;
+    }
+
+
 }
 
 

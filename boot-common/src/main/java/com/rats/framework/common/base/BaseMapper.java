@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by shangxiutao on 17/2/22.
  */
-public interface BaseMapper<T,ID> extends Mapper<T,ID>  {
+public interface BaseMapper<T,ID>  {
 
     /**
      * MenuMapper.countByExample
