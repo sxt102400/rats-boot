@@ -1,7 +1,7 @@
 package com.rats.mapper;
 
 
-import com.rats.framework.common.base.Mapper;
+import com.rats.framework.common.base.BaseMapper;
 
 import com.rats.entity.Depart;
 
@@ -14,6 +14,6 @@ import com.rats.entity.Depart;
  * @author : Lu generator
  * @since : 
  */
-public interface DepartMapper extends Mapper<Depart,Integer> {
+public interface DepartMapper extends BaseMapper<Depart,Integer> {
 
 }

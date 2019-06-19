@@ -32,12 +32,4 @@ public abstract class Pageable extends RowBounds   {
 
     public abstract void setTotalCount(long totalCount);
 
-    public static PageRequest of(int page) {
-        return new  PageRequest(page, DEFAULT_PAGE_SIZE);
-    }
-
-    public static PageRequest of(int page, int size) {
-        return new  PageRequest(page, size);
-    }
-
 }

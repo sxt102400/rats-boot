@@ -7,6 +7,7 @@ public class PageRequest extends Pageable implements Serializable {
 
     private static final long serialVersionUID = 1232825578694716871L;
 
+    public static final int DEFAULT_PAGE_SIZE = 10;
 
     /**
      * 分页每页页面记录数，设置为“-1”表示不进行分页（分页无效）
@@ -23,7 +24,7 @@ public class PageRequest extends Pageable implements Serializable {
 
     private int limit;
 
-    public PageRequest(int page, int size) {
+    private PageRequest(int page, int size) {
         if (page < 0) {
             throw new IllegalArgumentException("Page index must not be less than zero!");
         } else if (size < 1) {
@@ -32,6 +33,14 @@ public class PageRequest extends Pageable implements Serializable {
             this.pageNo = page;
             this.pageSize = size;
         }
+    }
+
+    public static PageRequest of(int page) {
+        return new  PageRequest(page, DEFAULT_PAGE_SIZE);
+    }
+
+    public static PageRequest of(int page, int size) {
+        return new  PageRequest(page, size);
     }
 
     public PageRequest previous() {

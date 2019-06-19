@@ -1,12 +1,9 @@
 package com.rats.service.impl;
 
 
-import java.util.List;
 import javax.annotation.Resource;
 
 import com.rats.framework.common.base.BaseServiceImpl;
-import com.rats.framework.common.base.Mapper;
-import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

@@ -6,24 +6,27 @@ import javax.servlet.http.HttpServletRequest;
 
 public class PageHelper {
 
-    public static final int DEFAULT_PAGE_SIZE = 10;
+    public static PageRequest of(int page) {
+        return PageRequest.of(page);
+    }
 
-    /**
-     * 构造方法，从request中获取:page,pageSize
-     *
-     * @param request  传递 page 参数，来记住页码
-     */
-    public static PageRequest getPage(HttpServletRequest request) {
-        return PageHelper.getPage(request,  DEFAULT_PAGE_SIZE);
+    public static PageRequest of(int page, int size) {
+        return PageRequest.of(page, size);
     }
 
     /**
      * 构造方法，从request中获取:page,pageSize
      *
-     * @param request  传递 page 参数，来记住页码
-     * @param pageSize 分页大小,pageSize<1不分页
+     * @param request 传递 page 参数，来记住页码
      */
-    public static PageRequest getPage(HttpServletRequest request, int pageSize) {
+    public static PageRequest get(HttpServletRequest request) {
+        int page = getPageNo(request);
+        int size = getPageSize(request);
+        return PageHelper.of(page, size);
+    }
+
+
+    private static int getPageNo(HttpServletRequest request) {
         // 设置页码参数（传递page参数，来记住页码）
         int pageNo;
         String no = request.getParameter("page");
@@ -35,19 +38,22 @@ public class PageHelper {
         } else {
             pageNo = 1;
         }
+        return pageNo;
+
+
+    }
+
+    private static int getPageSize(HttpServletRequest request) {
         // 设置页面大小参数（传递pageSize参数，来记住页码大小）
+        int pageSize;
         String size = request.getParameter("pageSize");
         if (StringUtils.isNumeric(size)) {
             pageSize = Integer.parseInt(size);
-            if (pageSize < 1) {
-                pageSize = Integer.MAX_VALUE;
-            }
         } else {
-            pageSize = DEFAULT_PAGE_SIZE;
+            throw new RuntimeException("pageSize convert error:" + size);
         }
-        pageSize = pageSize;
-        return PageRequest.of(pageNo, pageSize);
-
+        return pageSize;
     }
+
 
 }

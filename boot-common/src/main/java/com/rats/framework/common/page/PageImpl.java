@@ -25,6 +25,9 @@ public class PageImpl<T> implements Page<T> {
     public PageImpl(List<T> data, Pageable pageable) {
         this.data.addAll(data);
         this.pageable = pageable;
+        if (data != null) {
+            this.pageable.setTotalCount(data.size());
+        }
     }
 
     @Override

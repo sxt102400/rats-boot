@@ -27,7 +27,7 @@ public abstract class CommonServiceImpl<T, ID> extends ClassTypeAdapt<T> impleme
 
     private static final Logger logger = LoggerFactory.getLogger(BaseService.class);
 
-    public abstract Mapper<T, ID> getMapper();
+    public abstract BaseMapper<T, ID> getMapper();
 
     public Example buildExample(T condition) {
         Example example = new Example();

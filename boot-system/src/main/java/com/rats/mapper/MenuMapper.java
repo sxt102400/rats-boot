@@ -2,7 +2,7 @@ package com.rats.mapper;
 
 
 
-import com.rats.framework.common.base.Mapper;
+import com.rats.framework.common.base.BaseMapper;
 import com.rats.entity.Menu;
 
 /** Copyright (C) 2013 rats
@@ -14,7 +14,7 @@ import com.rats.entity.Menu;
  * @author : Lu generator
  * @since : 
  */
-public interface MenuMapper extends Mapper<Menu,Integer> {
+public interface MenuMapper extends BaseMapper<Menu,Integer> {
 
 
 }

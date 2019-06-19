@@ -25,7 +25,7 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> extends ClassT
 
     private static final Logger logger = LoggerFactory.getLogger(BaseService.class);
 
-    public abstract Mapper<T, ID> getMapper();
+    public abstract BaseMapper<T, ID> getMapper();
 
     public Example buildExample(T condition) {
         Example example = new Example();

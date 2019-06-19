@@ -4,9 +4,8 @@ package com.rats.service.impl;
 import javax.annotation.Resource;
 
 import com.rats.framework.common.base.BaseServiceImpl;
-import com.rats.framework.common.base.Mapper;
+import com.rats.framework.common.base.BaseMapper;
 import com.rats.framework.common.persistence.Example;
-import com.rats.framework.common.persistence.GeneratedExample;
 import org.springframework.stereotype.Service;
 
 import com.rats.entity.Depart;
@@ -30,7 +29,7 @@ public class DepartServiceImpl extends BaseServiceImpl<Depart, Integer> implemen
     private DepartMapper departMapper;
 
     @Override
-    public Mapper<Depart, Integer> getMapper() {
+    public BaseMapper<Depart, Integer> getMapper() {
         return departMapper;
     }
 
