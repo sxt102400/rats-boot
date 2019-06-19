@@ -6,11 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 
 public class PageHelper {
 
-    public static PageRequest of(int page) {
+    public static PageRequest ofPage(int page) {
         return PageRequest.of(page);
     }
 
-    public static PageRequest of(int page, int size) {
+    public static PageRequest ofPage(int page, int size) {
         return PageRequest.of(page, size);
     }
 
@@ -19,10 +19,10 @@ public class PageHelper {
      *
      * @param request 传递 page 参数，来记住页码
      */
-    public static PageRequest get(HttpServletRequest request) {
+    public static PageRequest getPage(HttpServletRequest request) {
         int page = getPageNo(request);
         int size = getPageSize(request);
-        return PageHelper.of(page, size);
+        return PageHelper.ofPage(page, size);
     }
 
 
