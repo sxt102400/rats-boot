@@ -6,11 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 
 public class PageHelper {
 
-    public static PageRequest ofPage(int page) {
+    public static PageRequest getPage(int page) {
         return PageRequest.of(page);
     }
 
-    public static PageRequest ofPage(int page, int size) {
+    public static PageRequest getPage(int page, int size) {
         return PageRequest.of(page, size);
     }
 
@@ -22,7 +22,7 @@ public class PageHelper {
     public static PageRequest getPage(HttpServletRequest request) {
         int page = getPageNo(request);
         int size = getPageSize(request);
-        return PageHelper.ofPage(page, size);
+        return PageHelper.getPage(page, size);
     }
 
 
