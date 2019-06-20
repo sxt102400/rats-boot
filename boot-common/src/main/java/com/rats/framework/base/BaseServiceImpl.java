@@ -1,6 +1,6 @@
 package com.rats.framework.base;
 
-import com.rats.framework.common.anno.MapperBean;
+import com.rats.framework.common.anno.ImportMapper;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.PageImpl;
 import com.rats.framework.common.page.Pageable;
@@ -27,8 +27,8 @@ public class BaseServiceImpl<T, ID extends Serializable> extends ClassTypeAdapt<
 
     public BaseMapper<T, ID> getMapper() {
         String entityClazz = getClassType().getSimpleName();
-        Annotation anno = this.getClass().getAnnotation(MapperBean.class);
-        Class<?> mapperClazz = ((MapperBean) anno).value();
+        Annotation anno = this.getClass().getAnnotation(ImportMapper.class);
+        Class<?> mapperClazz = ((ImportMapper) anno).value();
         BaseMapper bean = (BaseMapper) SpringContextHolder.getBean(mapperClazz);
         if (bean == null) {
             String beanName = String.format("%sMapper", getClassType().getSimpleName());

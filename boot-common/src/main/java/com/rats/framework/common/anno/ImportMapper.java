@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 @Target(value = {ElementType.TYPE})
 @Documented
 @Inherited
-public @interface MapperBean {
+public @interface ImportMapper {
 
     Class<? extends BaseMapper> value();
 }

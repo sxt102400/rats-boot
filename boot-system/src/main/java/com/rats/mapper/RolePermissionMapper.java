@@ -3,6 +3,7 @@ package com.rats.mapper;
 
 import java.util.List;
 
+import com.rats.framework.data.Example;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -25,7 +26,7 @@ public interface RolePermissionMapper {
      * @param example 查询条件
      * @return long 结果个数
      */
-    long countByExample(GeneratedExample example);
+    long countByExample(Example example);
 
     /**
      * Description: 根据查询条件，删除t_sys_role_permission中记录
