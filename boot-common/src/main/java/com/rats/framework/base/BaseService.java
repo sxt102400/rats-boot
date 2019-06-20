@@ -16,13 +16,8 @@ import java.util.Optional;
  */
 public interface BaseService<T, ID extends Serializable> {
 
+    /* find */
     long count();
-
-    int deleteAll();
-
-    int deleteAllInBatch();
-
-    int deleteById(ID id);
 
     boolean existsById(ID id);
 
@@ -30,30 +25,11 @@ public interface BaseService<T, ID extends Serializable> {
 
     Page<T> findAll(Pageable pageable);
 
-    List<T> findAllByIds(Iterable<ID> ids);
+    List<T> findAllByIds(List<ID> ids);
 
     <S extends T> Optional<S> findOneById(ID id);
 
-    <S extends T> Optional<S> findOne(Example example);
-
-    /**
-     * save or update
-     */
-    <S extends T> int save(S entity);
-
-    <S extends T> int update(S entity);
-
-    <S extends T> int update(S entity, Example example);
-
-    <S extends T> int saveOrUpdate(S entity);
-
-    <S extends T> int saveAll(List<S> entities);
-
-    <S extends T> int saveAllInBatch(List<S> entities);
-
-    /**
-     * Example
-     **/
+    /* find Example */
     long count(Example example);
 
     int delete(Example example);
@@ -63,6 +39,28 @@ public interface BaseService<T, ID extends Serializable> {
     List<T> findAll(Example example);
 
     Page<T> findAll(Example example, Pageable pageable);
+
+    <S extends T> Optional<S> findOne(Example example);
+
+    /* save or update */
+    <S extends T> void save(S entity);
+
+    <S extends T> void update(S entity);
+
+    <S extends T> void update(S entity, Example example);
+
+    <S extends T> void saveOrUpdate(S entity);
+
+    <S extends T> void saveAll(List<S> entities);
+
+    <S extends T> void saveAllInBatch(List<S> entities);
+
+    /* delete */
+    void deleteAll();
+
+    void deleteAllInBatch();
+
+    void deleteById(ID id);
 
 
 }

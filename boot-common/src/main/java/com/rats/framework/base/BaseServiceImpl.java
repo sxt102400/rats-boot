@@ -39,25 +39,9 @@ public class BaseServiceImpl<T, ID extends Serializable> extends ClassTypeAdapt<
         return bean;
     }
 
-
     @Override
     public long count() {
         return this.getMapper().countByExample(null);
-    }
-
-    @Override
-    public int deleteAll() {
-        return this.getMapper().deleteByExample(null);
-    }
-
-    @Override
-    public int deleteAllInBatch() {
-        return this.getMapper().deleteByExample(null);
-    }
-
-    @Override
-    public int deleteById(ID id) {
-        return this.getMapper().deleteByPrimaryKey(id);
     }
 
     @Override
@@ -78,7 +62,7 @@ public class BaseServiceImpl<T, ID extends Serializable> extends ClassTypeAdapt<
     }
 
     @Override
-    public List<T> findAllByIds(Iterable<ID> ids) {
+    public List<T> findAllByIds(List<ID> ids) {
         return null;
     }
 
@@ -88,53 +72,7 @@ public class BaseServiceImpl<T, ID extends Serializable> extends ClassTypeAdapt<
         return Optional.ofNullable(data);
     }
 
-    @Override
-    public <S extends T> Optional<S> findOne(Example example) {
-        List<T> list = this.getMapper().selectByExample(example);
-        if (list != null) {
-            if (list.size() > 1) {
-                logger.error("find more than one record:{}", list.size());
-                return null;
-            } else if (list.size() == 1) {
-                S data = (S) list.get(0);
-                return Optional.ofNullable(data);
-            }
-        }
-        return Optional.empty();
-    }
-
-    @Override
-    public <S extends T> int save(S entity) {
-        return this.getMapper().insert(entity);
-    }
-
-    @Override
-    public <S extends T> int update(S entity) {
-        return this.getMapper().updateByPrimaryKey(entity);
-    }
-
-    @Override
-    public <S extends T> int update(S entity, Example example) {
-        return this.getMapper().updateByExample(entity, example);
-    }
-
-    @Override
-    public <S extends T> int saveOrUpdate(S entity) {
-        return 0;
-    }
-
-    @Override
-    public <S extends T> int saveAll(List<S> entities) {
-        entities.forEach(entity -> save(entity));
-        return entities.size();
-    }
-
-    @Override
-    public <S extends T> int saveAllInBatch(List<S> entities) {
-        entities.forEach(entity -> save(entity));
-        return entities.size();
-    }
-
+    /* find Example */
     @Override
     public long count(Example example) {
         return this.getMapper().countByExample(example);
@@ -160,4 +98,70 @@ public class BaseServiceImpl<T, ID extends Serializable> extends ClassTypeAdapt<
         return null;
     }
 
+    @Override
+    public <S extends T> Optional<S> findOne(Example example) {
+        List<T> list = this.getMapper().selectByExample(example);
+        if (list != null) {
+            if (list.size() > 1) {
+                logger.error("find more than one record:{}", list.size());
+                return null;
+            } else if (list.size() == 1) {
+                S data = (S) list.get(0);
+                return Optional.ofNullable(data);
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * save or update
+     */
+    @Override
+    public <S extends T> void save(S entity) {
+        this.getMapper().insert(entity);
+    }
+
+    @Override
+    public <S extends T> void update(S entity) {
+        this.getMapper().updateByPrimaryKey(entity);
+    }
+
+    @Override
+    public <S extends T> void update(S entity, Example example) {
+        this.getMapper().updateByExample(entity, example);
+    }
+
+    @Override
+    public <S extends T> void saveOrUpdate(S entity) {
+    }
+
+    @Override
+    public <S extends T> void saveAll(List<S> entities) {
+        entities.forEach(entity -> save(entity));
+
+    }
+
+    @Override
+    public <S extends T> void saveAllInBatch(List<S> entities) {
+        entities.forEach(entity -> save(entity));
+    }
+
+
+    /**
+     * delete
+     */
+    @Override
+    public void deleteAll() {
+        this.getMapper().deleteByExample(null);
+    }
+
+    @Override
+    public void deleteAllInBatch() {
+        this.getMapper().deleteByExample(null);
+    }
+
+    @Override
+    public void deleteById(ID id) {
+        this.getMapper().deleteByPrimaryKey(id);
+    }
 }

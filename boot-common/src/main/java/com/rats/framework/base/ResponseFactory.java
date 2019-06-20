@@ -8,7 +8,6 @@ public abstract class ResponseFactory implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-
     public static ResponseBean getSuccessResult(Object data) {
         ResponseBean bean = new ResponseBean<>();
         bean.setCode(ResponseBean.SUCCESS);
