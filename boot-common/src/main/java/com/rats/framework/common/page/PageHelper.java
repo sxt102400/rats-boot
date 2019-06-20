@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ *
  * @author hanbing
- * @date 2019-0620
  * @since 1.0.0
+ * @date 2019-06-20
  */
 @Component
 public class PageHelper extends PageInfo {

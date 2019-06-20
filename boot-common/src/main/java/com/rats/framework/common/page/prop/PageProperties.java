@@ -4,9 +4,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
+ *
  * @author hanbing
- * @date 2019-0620
  * @since 1.0.0
+ * @date 2019-06-20
  */
 @Component
 @ConfigurationProperties("page")

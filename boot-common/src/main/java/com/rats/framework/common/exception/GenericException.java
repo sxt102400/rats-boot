@@ -3,8 +3,10 @@ package com.rats.framework.common.exception;
 import java.io.Serializable;
 
 /**
- * @author yafei
- * @since 2016/11/15
+ *
+ * @author hanbing
+ * @since 1.0.0
+ * @date 2019-06-20
  */
 public class GenericException extends RuntimeException implements Serializable {
     String errorCode;

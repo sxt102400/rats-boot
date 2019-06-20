@@ -6,7 +6,7 @@ import org.apache.ibatis.session.RowBounds;
  *
  * @author hanbing
  * @since 1.0.0
- * @date 2019-0620
+ * @date 2019-06-20
  */
 public abstract class Pageable extends RowBounds   {
 

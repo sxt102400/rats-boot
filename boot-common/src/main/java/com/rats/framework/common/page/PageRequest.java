@@ -2,6 +2,12 @@ package com.rats.framework.common.page;
 
 import java.io.Serializable;
 
+/**
+ *
+ * @author hanbing
+ * @since 1.0.0
+ * @date 2019-06-20
+ */
 public class PageRequest extends Pageable implements Serializable {
 
     private static final long serialVersionUID = 1232825578694716871L;

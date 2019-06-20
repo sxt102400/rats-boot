@@ -10,6 +10,12 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ *
+ * @author hanbing
+ * @since 1.0.0
+ * @date 2019-06-20
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler extends SimpleMappingExceptionResolver {
 

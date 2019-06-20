@@ -2,6 +2,12 @@ package com.rats.framework.base;
 
 import java.io.Serializable;
 
+/**
+ *
+ * @author hanbing
+ * @since 1.0.0
+ * @date 2019-06-20
+ */
 public class ResponseBean<T> implements Serializable {
 
     public static final int SUCCESS = 0;

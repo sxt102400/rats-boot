@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author hanbing
  * @since 1.0.0
- * @date 2019-0620
+ * @date 2019-06-20
  */
 public interface BaseMapper<T,ID>  {
 

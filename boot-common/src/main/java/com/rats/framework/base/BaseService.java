@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ *
  * @author hanbing
- * @date 2019-0620
  * @since 1.0.0
+ * @date 2019-06-20
  */
 public interface BaseService<T, ID extends Serializable> {
 

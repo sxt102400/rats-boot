@@ -2,37 +2,37 @@ package com.rats.framework.common.page;
 
 import java.util.Iterator;
 import java.util.List;
+
 /**
- *
  * @author hanbing
+ * @date 2019-06-20
  * @since 1.0.0
- * @date 2019-0620
  */
-public interface Page<T>{
+public interface Page<T> {
 
-    int getPageNo();            //当前第几页   返回当前页的数目。总是非负的
+    int getPageNo();
 
-    int getPageSize();              //返回当前页面的大小。
+    int getPageSize();
 
-    long getTotalPage();         //返回分页总数。
+    long getTotalPage();
 
-    long getTotalCount();   //返回元素总数。
+    long getTotalCount();
 
-    boolean hasPrePage();  //返回如果有上一页。
+    boolean hasPrePage();
 
-    boolean hasNextPage();      //返回如果有下一页。
+    boolean hasNextPage();
 
-    boolean isFirstPage();      //返回当前页是否为第一页。
+    boolean isFirstPage();
 
-    boolean isLastPage();       //返回当前页是否为最后一页。
+    boolean isLastPage();
 
     Iterator<T> iterator();
 
     Pageable getPageable();
 
-    List<T> getData();     //将所有数据返回为List
+    List<T> getData();
 
-    boolean hasData();     //返回数据是否有内容。
+    boolean hasData();
 
     String toJSONString();
 }
