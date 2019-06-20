@@ -11,8 +11,8 @@ import com.rats.entity.Role;
 import com.rats.service.RoleService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
-import com.rats.framework.common.base.BaseController;
-import com.rats.framework.common.base.ResponseBean;
+import com.rats.framework.base.BaseController;
+import com.rats.framework.base.ResponseBean;
  import com.rats.framework.common.page.PageHelper;
 
 

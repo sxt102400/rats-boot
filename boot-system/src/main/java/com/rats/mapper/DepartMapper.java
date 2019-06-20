@@ -1,7 +1,7 @@
 package com.rats.mapper;
 
 
-import com.rats.framework.common.base.BaseMapper;
+import com.rats.framework.base.BaseMapper;
 
 import com.rats.entity.Depart;
 

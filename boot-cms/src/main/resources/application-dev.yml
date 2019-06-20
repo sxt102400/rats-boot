@@ -10,6 +10,16 @@ spring:
   # session
   session:
     store-type: none
+  # json
+  jackson:
+      default-property-inclusion: non_null
+  # 模板配置
+  thymeleaf:
+    cache: false
+    # 这个是配置模板路径的，默认就是templates，可不用配置
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
   # 数据库配置
   datasource:
     # 数据库连接配置
@@ -33,22 +43,28 @@ spring:
     filters: stat,wall,log4j
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     logSlowSql: true
-  # 模板配置
-  thymeleaf:
-    cache: false
-    # 这个是配置模板路径的，默认就是templates，可不用配置
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: HTML5
-  # json
-  jackson:
-      default-property-inclusion: non_null
+  # redis
+  redis:
+    host: 127.0.0.1
+    port: 7000
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
 
 # mybatis配置
 mybatis:
   mapperLocations: classpath*:com/rats/mapper/**/*.xml
   typeAliasesPackage: com.rats.mapper
 
+page:
+  pageNo:
+    paramName: pageNo
+    defaultValue: 1
+  pageSize:
+     paramName: pageSize
+     defaultValue: 20
 # logback配置
 logging:
   path: logs/

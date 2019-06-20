@@ -1,8 +1,8 @@
 <#-- 变量定义=================== -->
 <#assign copyright="Copyright (C) 2013 rats">
 <#assign author="Lu generator">
-<#assign example= "com.rats.framework.common.persistence.GeneratedExample" >
-<#assign pageable= "com.rats.framework.common.persistence.Page" >
+<#assign example= "com.rats.framework.data.persistence.GeneratedExample" >
+<#assign pageable= "com.rats.framework.data.persistence.Page" >
 
 <#-- 主键类型 -->
 <#macro pkType><#list table.pkColumns as column>${column.fullJavaType}<#if column_has_next>,</#if></#list></#macro>

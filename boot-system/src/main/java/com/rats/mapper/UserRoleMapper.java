@@ -3,7 +3,6 @@ package com.rats.mapper;
 
 import java.util.List;
 
-import com.rats.framework.common.persistence.GeneratedExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 

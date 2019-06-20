@@ -3,9 +3,9 @@ package com.rats.service.impl;
 
 
 import com.rats.framework.common.anno.WithMapper;
-import com.rats.framework.common.base.BaseServiceImpl;
-import com.rats.framework.common.base.BaseMapper;
-import com.rats.framework.common.persistence.Example;
+import com.rats.framework.base.BaseServiceImpl;
+import com.rats.framework.base.BaseMapper;
+import com.rats.framework.data.Example;
 import org.springframework.stereotype.Service;
 
 import com.rats.entity.Depart;

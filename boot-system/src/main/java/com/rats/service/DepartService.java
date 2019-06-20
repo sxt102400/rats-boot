@@ -1,7 +1,7 @@
 package com.rats.service;
 
 import com.rats.entity.Depart;
-import com.rats.framework.common.base.BaseService;
+import com.rats.framework.base.BaseService;
 
 /**
 * DepartService

@@ -2,7 +2,6 @@ package com.rats.framework.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -17,10 +16,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
 
-        PageImpl a;
     }
 
-    //解决跨域
+    /**
+     * corsFilter
+     *
+     * @return
+     */
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration conf = new CorsConfiguration();

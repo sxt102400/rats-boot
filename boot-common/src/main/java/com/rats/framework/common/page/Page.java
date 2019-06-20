@@ -1,20 +1,20 @@
 package com.rats.framework.common.page;
 
-
-
-
 import java.util.Iterator;
 import java.util.List;
-
+/**
+ *
+ * @author hanbing
+ * @since 1.0.0
+ * @date 2019-0620
+ */
 public interface Page<T>{
 
     int getPageNo();            //当前第几页   返回当前页的数目。总是非负的
 
     int getPageSize();              //返回当前页面的大小。
 
-    int getTotalPage();         //返回分页总数。
-
-    int getPageCount();    //返回当前页上的元素数。
+    long getTotalPage();         //返回分页总数。
 
     long getTotalCount();   //返回元素总数。
 

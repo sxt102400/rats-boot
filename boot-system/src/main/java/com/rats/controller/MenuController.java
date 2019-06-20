@@ -1,7 +1,7 @@
 package com.rats.controller;
 
 
-import com.rats.framework.common.base.ResponseFactory;
+import com.rats.framework.base.ResponseFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +11,8 @@ import com.rats.entity.Menu;
 import com.rats.service.MenuService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
-import com.rats.framework.common.base.BaseController;
-import com.rats.framework.common.base.ResponseBean;
+import com.rats.framework.base.BaseController;
+import com.rats.framework.base.ResponseBean;
  import com.rats.framework.common.page.PageHelper;
 
 

@@ -1,7 +1,7 @@
 package com.rats.framework.config;
 
-import com.rats.framework.common.persistence.plugin.MybatisPaginationPlugin;
-import com.rats.framework.common.persistence.plugin.MybatisSqlLogPlugin;
+import com.rats.framework.data.persistence.plugin.MybatisPaginationPlugin;
+import com.rats.framework.data.persistence.plugin.MybatisSqlLogPlugin;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.data.domain.Page;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
@@ -40,6 +41,7 @@ public class MybatisConfig implements TransactionManagementConfigurer {
 
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
+
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         bean.setTypeAliasesPackage(typeAliasesPackage);

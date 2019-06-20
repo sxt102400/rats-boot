@@ -1,7 +1,7 @@
 <#-- 变量定义=================== -->
 <#assign copyright="Copyright (C) 2013 rats">
 <#assign author="Lu generator">
-<#assign example= "com.rats.framework.common.persistence.GeneratedExample" >
+<#assign example= "com.rats.framework.data.persistence.GeneratedExample" >
 <#assign page= "com.rats.framework.common.page.Page" >
 <#assign pageable= "com.rats.framework.common.page.Pageable" >
 <#assign pageImpl= "com.rats.framework.common.page.PageImpl" >

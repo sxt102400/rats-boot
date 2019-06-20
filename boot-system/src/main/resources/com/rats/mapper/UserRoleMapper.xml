@@ -12,7 +12,7 @@
              id ,  role_id ,  user_id  
     </sql>
 
-    <select id="selectByExample" parameterType="com.rats.framework.common.persistence.GeneratedExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.rats.framework.data.persistence.GeneratedExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -41,7 +41,7 @@
 
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.rats.framework.common.persistence.GeneratedExample">
+    <delete id="deleteByExample" parameterType="com.rats.framework.data.persistence.GeneratedExample">
         delete from t_sys_user_role
         <if test="_parameter != null" >
             <include refid="common.Example_Where_Clause" />
@@ -138,7 +138,7 @@
 
 
 
-    <select id="countByExample" parameterType="com.rats.framework.common.persistence.GeneratedExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.rats.framework.data.persistence.GeneratedExample" resultType="java.lang.Long">
         select count(*) from t_sys_user_role
         <if test="_parameter != null">
             <include refid="common.Example_Where_Clause" />

@@ -1,13 +1,25 @@
 package com.rats.framework.common.page;
 
+import com.rats.framework.common.page.prop.PageInfo;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class PageHelper {
+/**
+ * @author hanbing
+ * @date 2019-0620
+ * @since 1.0.0
+ */
+@Component
+public class PageHelper extends PageInfo {
+
+    public static PageRequest getPage() {
+        return PageRequest.of(pageNo().getDefaultValue(), pageSize().getDefaultValue());
+    }
 
     public static PageRequest getPage(int page) {
-        return PageRequest.of(page);
+        return PageRequest.of(page, pageSize().getDefaultValue());
     }
 
     public static PageRequest getPage(int page, int size) {
@@ -25,11 +37,10 @@ public class PageHelper {
         return PageHelper.getPage(page, size);
     }
 
-
     private static int getPageNo(HttpServletRequest request) {
         // 设置页码参数（传递page参数，来记住页码）
         int pageNo;
-        String no = request.getParameter("page");
+        String no = request.getParameter(pageNo().getParamName());
         if (StringUtils.isNumeric(no)) {
             pageNo = Integer.parseInt(no);
             if (pageNo < 1) {
@@ -39,14 +50,12 @@ public class PageHelper {
             pageNo = 1;
         }
         return pageNo;
-
-
     }
 
     private static int getPageSize(HttpServletRequest request) {
         // 设置页面大小参数（传递pageSize参数，来记住页码大小）
         int pageSize;
-        String size = request.getParameter("pageSize");
+        String size = request.getParameter(pageSize().getParamName());
         if (StringUtils.isNumeric(size)) {
             pageSize = Integer.parseInt(size);
         } else {

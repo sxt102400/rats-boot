@@ -2,7 +2,7 @@ package com.rats.mapper;
 
 
 
-import com.rats.framework.common.base.BaseMapper;
+import com.rats.framework.base.BaseMapper;
 import com.rats.entity.Menu;
 
 /** Copyright (C) 2013 rats

@@ -4,25 +4,15 @@ import java.io.Serializable;
 
 public class PageRequest extends Pageable implements Serializable {
 
-
     private static final long serialVersionUID = 1232825578694716871L;
 
-    public static final int DEFAULT_PAGE_SIZE = 10;
+    private int pageNo;
 
-    /**
-     * 分页每页页面记录数，设置为“-1”表示不进行分页（分页无效）
-     */
-    private final int pageNo;
-
-    private final int pageSize;
+    private int pageSize;
 
     private long totalCount;
 
     private long totalPage;
-
-    private int offset;
-
-    private int limit;
 
     private PageRequest(int page, int size) {
         if (page < 0) {
@@ -35,12 +25,29 @@ public class PageRequest extends Pageable implements Serializable {
         }
     }
 
-    public static PageRequest of(int page) {
-        return new  PageRequest(page, DEFAULT_PAGE_SIZE);
-    }
 
     public static PageRequest of(int page, int size) {
-        return new  PageRequest(page, size);
+        return new PageRequest(page, size);
+    }
+
+    @Override
+    public int getPageNo() {
+        return pageNo;
+    }
+
+    @Override
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    @Override
+    public long getTotalPage() {
+        return totalPage;
+    }
+
+    @Override
+    public long getTotalCount() {
+        return totalCount;
     }
 
     public PageRequest previous() {
@@ -52,39 +59,18 @@ public class PageRequest extends Pageable implements Serializable {
     }
 
     @Override
-    public int getPageNo() {
-         return pageNo;
-    }
-
-    @Override
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public int getOffset() {
-        return offset;
-    }
-
-    @Override
-    public int getLimit() {
-        return limit;
-    }
-
     public int hashCode() {
         return 31 * super.hashCode();
     }
 
+    @Override
     public String toString() {
         return String.format("Page request [number: %d, size %d]", this.getPageNo(), this.getPageSize());
     }
 
-    public long getTotalCount() {
-        return totalCount;
-    }
-
     public void setTotalCount(long totalCount) {
         this.totalCount = totalCount;
-        this.limit = this.getPageSize();
+        this.pageSize = this.getPageSize();
         this.totalPage = this.totalCount / this.getPageSize();
         if (this.totalCount % this.getPageSize() != 0) this.totalPage++;
     }

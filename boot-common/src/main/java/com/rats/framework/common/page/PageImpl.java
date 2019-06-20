@@ -1,16 +1,18 @@
 package com.rats.framework.common.page;
 
-import com.rats.framework.common.utils.JSONUtils;
+import com.rats.framework.utils.JSONUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.springframework.data.domain.PageRequest;
 
 import java.util.*;
 
+/**
+ *
+ * @author hanbing
+ * @since 1.0.0
+ * @date 2019-0620
+ */
 public class PageImpl<T> implements Page<T> {
 
-    /**
-     * serialVersionUID
-     */
     private static final long serialVersionUID = 1L;
 
     private Pageable pageable;
@@ -40,14 +42,8 @@ public class PageImpl<T> implements Page<T> {
         return pageable.getPageSize();
     }
 
-
-    public int getTotalPage() {
-        return this.getPageSize() == 0 ? 1 : (int) Math.ceil((double) this.getTotalCount() / (double) this.getPageSize());
-    }
-
-    @Override
-    public int getPageCount() {
-        return 0;
+    public long getTotalPage() {
+        return this.getPageSize() == 0 ? 1 : (long) Math.ceil((double) this.getTotalCount() / (double) this.getPageSize());
     }
 
     @Override

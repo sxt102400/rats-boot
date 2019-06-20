@@ -4,8 +4,7 @@ package com.rats.service.impl;
 import java.util.List;
 import javax.annotation.Resource;
 
-import com.rats.framework.common.persistence.Example;
-import com.rats.framework.common.persistence.GeneratedExample;
+import com.rats.framework.data.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

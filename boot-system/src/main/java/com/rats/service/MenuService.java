@@ -1,11 +1,7 @@
 package com.rats.service;
 
-import java.util.List;
-
 import com.rats.entity.Menu;
-import com.rats.framework.common.base.BaseService;
-import com.rats.framework.common.page.Page;
-import com.rats.framework.common.page.Pageable;
+import com.rats.framework.base.BaseService;
 
 /**
 * MenuService

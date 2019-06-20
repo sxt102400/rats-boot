@@ -4,7 +4,7 @@ package com.rats.service.impl;
 import javax.annotation.Resource;
 
 import com.rats.framework.common.anno.WithMapper;
-import com.rats.framework.common.base.BaseServiceImpl;
+import com.rats.framework.base.BaseServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

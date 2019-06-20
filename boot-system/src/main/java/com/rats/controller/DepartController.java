@@ -1,9 +1,10 @@
 package com.rats.controller;
 
 
-import com.rats.framework.common.base.ResponseFactory;
-import com.rats.framework.common.persistence.Example;
+import com.rats.framework.base.ResponseFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.mongodb.core.query.MongoRegexCreator;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +14,8 @@ import com.rats.entity.Depart;
 import com.rats.service.DepartService;
 import com.rats.framework.common.page.Page;
 import com.rats.framework.common.page.Pageable;
-import com.rats.framework.common.base.BaseController;
-import com.rats.framework.common.base.ResponseBean;
+import com.rats.framework.base.BaseController;
+import com.rats.framework.base.ResponseBean;
  import com.rats.framework.common.page.PageHelper;
 
 

@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.rats.framework.common.persistence.GeneratedExample;
 import com.rats.entity.Menu;
 import com.rats.mapper.MenuMapper;
 

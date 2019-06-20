@@ -1,6 +1,6 @@
 package com.rats.framework.common.data;
 
-import com.rats.framework.common.utils.JSONUtils;
+import com.rats.framework.utils.JSONUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
