@@ -1,116 +1,106 @@
-package ${ @tpl_controller.packageName};
+package ${ @tpl.controller.packageName};
 
 <#include "global.ftl">
-
+import com.rats.framework.common.data.Example;
+import com.rats.framework.common.page.Page;
+import com.rats.framework.common.page.PageHelper;
+import com.rats.framework.common.response.ResponseBean;
+import com.rats.framework.common.response.ResponseFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import ${@tpl_entity.packageName}.${className};
-import ${@tpl_service.packageName}.${className}Service;
-import ${page};
+import ${@tpl.entity.packageName}.${className};
+import ${@tpl.service.packageName}.${className}Service;
+import ${basePackage}.BaseController;
 
 /** ${copyright}
  *
- * ${className}Controller
- * Description: ${table.remark!}
+ * ${className}Controller  ${table.remark!}
  *
- * @version : v1.0
- * @author : ${author!}
- * @since : ${now!}
+ * @author ${author!}
+ * @since 1.0.0
+ * @date ${now!}
  */
 
-@Controller
-@RequestMapping
-public class ${className}Controller  {
+@RestController
+public class ${className}Controller extends BaseController {
 
     @Autowired
     private ${className}Service ${className?uncap_first}Service;
 
-
-    @RequestMapping(value = "/${className?uncap_first}/list", method = RequestMethod.GET)
-    public String toIndex(HttpServletRequest request, HttpServletResponse response) {
-        return "${className?uncap_first}/${className?uncap_first}List";
-    }
-
-<#if table.pkCount == 1>
-    @RequestMapping(value = "/${className?uncap_first}/info", method = RequestMethod.GET)
-    public String toInfo(HttpServletRequest request, HttpServletResponse response,<@pkTypeAndField/>,Model model) {
-        ${className} ${className?uncap_first} = ${className?uncap_first}Service.selectByPrimaryKey(<@pkField/>);
-        model.addAttribute("${className?uncap_first}", ${className?uncap_first});
-        return "${className?uncap_first}/${className?uncap_first}Info";
-    }
-</#if>
-
-
-    @RequestMapping(value = "/${className?uncap_first}/add", method = RequestMethod.GET)
-    public String toAdd(HttpServletRequest request, HttpServletResponse response) {
-            return "${className?uncap_first}/${className?uncap_first}Add";
-    }
-
-    @RequestMapping(value = "/${className?uncap_first}/edit")
-    public String toEdit(HttpServletRequest request, HttpServletResponse response,@RequestParam <@pkTypeAndField/>,Model model) {
-        ${className} ${className?uncap_first} = ${className?uncap_first}Service.selectByPrimaryKey(<@pkField/>);
-        model.addAttribute("<@pkField/>", <@pkField/>);
-        model.addAttribute("${className?uncap_first}",${className?uncap_first});
-        return "${className?uncap_first}/${className?uncap_first}Edit";
+    /**
+     * 查询一条数据
+     *
+     * @param <@keyField/>
+     * @return
+     */
+    @GetMapping("/${className?uncap_first}/:<@keyField/>")
+    public ResponseBean get(@PathVariable <@keyTypeAndField/>) {
+        ${className} ${className?uncap_first} = ${className?uncap_first}Service.findOneById(<@keyField/>).get();
+        return ResponseFactory.getSuccessResponse(${className?uncap_first});
     }
 
     /**
-     * ajax返回json分页数据，request中传递参数page,pageSize
+     * ajax分页查询，request中传递条件参数page,pageSize
+     *
+     * @param ${className?uncap_first}
+     * @return
      */
-    @RequestMapping(value = "/${className?uncap_first}/json/list")
-    @ResponseBody
-    public String list(HttpServletRequest request, HttpServletResponse response,${className} ${className?uncap_first} ) {
-        Page page = ${className?uncap_first}Service.select(${className?uncap_first}, new Page(request,response) );
-        return page.toJSON();
+    @GetMapping( "/${className?uncap_first}/page")
+    public ResponseBean page(${className} ${className?uncap_first}) {
+        Page page = ${className?uncap_first}Service.findAll(Example.of(${className?uncap_first}),  PageHelper.getPage());
+        return ResponseFactory.getSuccessResponse(page);
     }
 
-
-    @RequestMapping(value = "/${className?uncap_first}/save")
-    @ResponseBody
-    public Map save(${className} ${className?uncap_first} ) {
-        ${className?uncap_first}Service.save(${className?uncap_first} );
-
-        Map map = new HashMap();
-        map.put("success",true);
-        map.put("message","保存成功");
-        return map;
+    /**
+     * 保存
+     *
+     * @param ${className?uncap_first}
+     * @return
+     */
+    @PostMapping("/${className?uncap_first}")
+    public ResponseBean add(${className} ${className?uncap_first}) {
+        ${className?uncap_first}Service.save(${className?uncap_first});
+        return ResponseFactory.getDefaultSuccessResponse();
     }
 
-<#if table.pkCount == 1>
-    @RequestMapping(value = "/${className?uncap_first}/update")
-    @ResponseBody
-    public Map update(${className}  ${className?uncap_first} ) {
-
-        ${className?uncap_first}Service.updateByPrimaryKey( ${className?uncap_first} );
-
-        Map map = new HashMap();
-        map.put("success",true);
-        map.put("message","保存成功");
-        return map;
+    /**
+     * 编辑
+     *
+     * @param <@keyField/>
+     * @param ${className?uncap_first}
+     * @return
+     */
+    @PutMapping("/${className?uncap_first}/:id")
+    public ResponseBean edit(@PathVariable <@keyTypeAndField/>, ${className} ${className?uncap_first}) {
+        ${className?uncap_first}Service.update(${className?uncap_first});
+        return ResponseFactory.getDefaultSuccessResponse();
     }
 
-    @RequestMapping(value = "/${className?uncap_first}/delete")
-    @ResponseBody
-    public Map delete(@RequestParam <@pkTypeAndField/>) {
-        ${className?uncap_first}Service.deleteByPrimaryKey( <@pkField/> );
-        Map map = new HashMap();
-
-        map.put("success",true);
-        map.put("message","保存成功");
-        return map;
+    /**
+     * 删除
+     *
+     * @param <@keyField/>
+     * @return
+     */
+    @DeleteMapping(value = "/${className?uncap_first}/:id")
+    public ResponseBean remove(@PathVariable <@keyTypeAndField/>) {
+        ${className?uncap_first}Service.deleteById(<@keyField/>);
+        return ResponseFactory.getDefaultSuccessResponse();
     }
 
-</#if>
-}
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

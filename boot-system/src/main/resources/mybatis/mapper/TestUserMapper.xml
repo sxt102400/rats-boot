@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rats.rbac.dao.TestUserMapper">
+    <resultMap id="BaseResultMap" type="com.rats.rbac.entity.TestUser">
+        <id column="id"  jdbcType="INTEGER" property="id"/>
+        <id column="sid"  jdbcType="INTEGER" property="sid"/>
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="user_type" jdbcType="CHAR" property="userType" />
+        <result column="photo" jdbcType="VARCHAR" property="photo" />
+        <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+        <result column="login_date" jdbcType="TIMESTAMP" property="loginDate" />
+        <result column="login_flag" jdbcType="VARCHAR" property="loginFlag" />
+        <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+        <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+        <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+        <result column="qrcode" jdbcType="VARCHAR" property="qrcode" />
+        <result column="sign" jdbcType="VARCHAR" property="sign" />
+        <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+             id ,  sid ,  username ,  password ,  nickname ,  email ,  phone ,  mobile ,  user_type ,  photo ,  login_ip ,  login_date ,  login_flag ,  create_by ,  create_date ,  update_by ,  update_date ,  remarks ,  del_flag ,  qrcode ,  sign ,  real_name  
+    </sql>
+
+    <select id="selectByExample"  parameterType="com.rats.framework.common.data.Example" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from tb_test_user
+        <if test="_parameter != null" >
+            <include refid="common.Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="com.rats.rbac.entity.TestUser$Key" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from tb_test_user
+        where  id = #{id ,jdbcType=INTEGER}  and   sid = #{sid ,jdbcType=INTEGER}  
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.rats.rbac.entity.TestUser$Key" >
+        delete from tb_test_user
+        where  id = #{id ,jdbcType=INTEGER}  and   sid = #{sid ,jdbcType=INTEGER}  
+
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.rats.framework.common.data.Example">
+        delete from tb_test_user
+        <if test="_parameter != null" >
+            <include refid="common.Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.rats.rbac.entity.TestUser">
+        insert into tb_test_user (
+             id ,  sid ,  username ,  password ,  nickname ,  email ,  phone ,  mobile ,  user_type ,  photo ,  login_ip ,  login_date ,  login_flag ,  create_by ,  create_date ,  update_by ,  update_date ,  remarks ,  del_flag ,  qrcode ,  sign ,  real_name  
+        ) values (
+             #{id, jdbcType=INTEGER} ,  #{sid, jdbcType=INTEGER} ,  #{username, jdbcType=VARCHAR} ,  #{password, jdbcType=VARCHAR} ,  #{nickname, jdbcType=VARCHAR} ,  #{email, jdbcType=VARCHAR} ,  #{phone, jdbcType=VARCHAR} ,  #{mobile, jdbcType=VARCHAR} ,  #{userType, jdbcType=CHAR} ,  #{photo, jdbcType=VARCHAR} ,  #{loginIp, jdbcType=VARCHAR} ,  #{loginDate, jdbcType=TIMESTAMP} ,  #{loginFlag, jdbcType=VARCHAR} ,  #{createBy, jdbcType=VARCHAR} ,  #{createDate, jdbcType=TIMESTAMP} ,  #{updateBy, jdbcType=VARCHAR} ,  #{updateDate, jdbcType=TIMESTAMP} ,  #{remarks, jdbcType=VARCHAR} ,  #{delFlag, jdbcType=CHAR} ,  #{qrcode, jdbcType=VARCHAR} ,  #{sign, jdbcType=VARCHAR} ,  #{realName, jdbcType=VARCHAR}  
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.rats.rbac.entity.TestUser">
+        insert into tb_test_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+            id,
+        </if>
+        <if test="sid != null">
+            sid,
+        </if>
+        <if test="username != null">
+            username,
+        </if>
+        <if test="password != null">
+            password,
+        </if>
+        <if test="nickname != null">
+            nickname,
+        </if>
+        <if test="email != null">
+            email,
+        </if>
+        <if test="phone != null">
+            phone,
+        </if>
+        <if test="mobile != null">
+            mobile,
+        </if>
+        <if test="userType != null">
+            user_type,
+        </if>
+        <if test="photo != null">
+            photo,
+        </if>
+        <if test="loginIp != null">
+            login_ip,
+        </if>
+        <if test="loginDate != null">
+            login_date,
+        </if>
+        <if test="loginFlag != null">
+            login_flag,
+        </if>
+        <if test="createBy != null">
+            create_by,
+        </if>
+        <if test="createDate != null">
+            create_date,
+        </if>
+        <if test="updateBy != null">
+            update_by,
+        </if>
+        <if test="updateDate != null">
+            update_date,
+        </if>
+        <if test="remarks != null">
+            remarks,
+        </if>
+        <if test="delFlag != null">
+            del_flag,
+        </if>
+        <if test="qrcode != null">
+            qrcode,
+        </if>
+        <if test="sign != null">
+            sign,
+        </if>
+        <if test="realName != null">
+            real_name,
+        </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+            #{id, jdbcType=INTEGER} ,
+        </if>
+        <if test="sid != null">
+            #{sid, jdbcType=INTEGER} ,
+        </if>
+        <if test="username != null">
+            #{username, jdbcType=VARCHAR} ,
+        </if>
+        <if test="password != null">
+            #{password, jdbcType=VARCHAR} ,
+        </if>
+        <if test="nickname != null">
+            #{nickname, jdbcType=VARCHAR} ,
+        </if>
+        <if test="email != null">
+            #{email, jdbcType=VARCHAR} ,
+        </if>
+        <if test="phone != null">
+            #{phone, jdbcType=VARCHAR} ,
+        </if>
+        <if test="mobile != null">
+            #{mobile, jdbcType=VARCHAR} ,
+        </if>
+        <if test="userType != null">
+            #{userType, jdbcType=CHAR} ,
+        </if>
+        <if test="photo != null">
+            #{photo, jdbcType=VARCHAR} ,
+        </if>
+        <if test="loginIp != null">
+            #{loginIp, jdbcType=VARCHAR} ,
+        </if>
+        <if test="loginDate != null">
+            #{loginDate, jdbcType=TIMESTAMP} ,
+        </if>
+        <if test="loginFlag != null">
+            #{loginFlag, jdbcType=VARCHAR} ,
+        </if>
+        <if test="createBy != null">
+            #{createBy, jdbcType=VARCHAR} ,
+        </if>
+        <if test="createDate != null">
+            #{createDate, jdbcType=TIMESTAMP} ,
+        </if>
+        <if test="updateBy != null">
+            #{updateBy, jdbcType=VARCHAR} ,
+        </if>
+        <if test="updateDate != null">
+            #{updateDate, jdbcType=TIMESTAMP} ,
+        </if>
+        <if test="remarks != null">
+            #{remarks, jdbcType=VARCHAR} ,
+        </if>
+        <if test="delFlag != null">
+            #{delFlag, jdbcType=CHAR} ,
+        </if>
+        <if test="qrcode != null">
+            #{qrcode, jdbcType=VARCHAR} ,
+        </if>
+        <if test="sign != null">
+            #{sign, jdbcType=VARCHAR} ,
+        </if>
+        <if test="realName != null">
+            #{realName, jdbcType=VARCHAR} ,
+        </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateByExampleSelective" parameterType="map">
+        update tb_test_user
+        <set>
+            <if test="record.id != null">
+                id = #{record.id, jdbcType=INTEGER} ,
+            </if>
+            <if test="record.sid != null">
+                sid = #{record.sid, jdbcType=INTEGER} ,
+            </if>
+            <if test="record.username != null">
+                username = #{record.username, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.password != null">
+                password = #{record.password, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.nickname != null">
+                nickname = #{record.nickname, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.email != null">
+                email = #{record.email, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.phone != null">
+                phone = #{record.phone, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.mobile != null">
+                mobile = #{record.mobile, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.userType != null">
+                user_type = #{record.userType, jdbcType=CHAR} ,
+            </if>
+            <if test="record.photo != null">
+                photo = #{record.photo, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.loginIp != null">
+                login_ip = #{record.loginIp, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.loginDate != null">
+                login_date = #{record.loginDate, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="record.loginFlag != null">
+                login_flag = #{record.loginFlag, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.createBy != null">
+                create_by = #{record.createBy, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.createDate != null">
+                create_date = #{record.createDate, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="record.updateBy != null">
+                update_by = #{record.updateBy, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.updateDate != null">
+                update_date = #{record.updateDate, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="record.remarks != null">
+                remarks = #{record.remarks, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.delFlag != null">
+                del_flag = #{record.delFlag, jdbcType=CHAR} ,
+            </if>
+            <if test="record.qrcode != null">
+                qrcode = #{record.qrcode, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.sign != null">
+                sign = #{record.sign, jdbcType=VARCHAR} ,
+            </if>
+            <if test="record.realName != null">
+                real_name = #{record.realName, jdbcType=VARCHAR} ,
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="common.Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map">
+        update tb_test_user
+        set
+            id = #{record.id, jdbcType=INTEGER} ,
+            sid = #{record.sid, jdbcType=INTEGER} ,
+            username = #{record.username, jdbcType=VARCHAR} ,
+            password = #{record.password, jdbcType=VARCHAR} ,
+            nickname = #{record.nickname, jdbcType=VARCHAR} ,
+            email = #{record.email, jdbcType=VARCHAR} ,
+            phone = #{record.phone, jdbcType=VARCHAR} ,
+            mobile = #{record.mobile, jdbcType=VARCHAR} ,
+            user_type = #{record.userType, jdbcType=CHAR} ,
+            photo = #{record.photo, jdbcType=VARCHAR} ,
+            login_ip = #{record.loginIp, jdbcType=VARCHAR} ,
+            login_date = #{record.loginDate, jdbcType=TIMESTAMP} ,
+            login_flag = #{record.loginFlag, jdbcType=VARCHAR} ,
+            create_by = #{record.createBy, jdbcType=VARCHAR} ,
+            create_date = #{record.createDate, jdbcType=TIMESTAMP} ,
+            update_by = #{record.updateBy, jdbcType=VARCHAR} ,
+            update_date = #{record.updateDate, jdbcType=TIMESTAMP} ,
+            remarks = #{record.remarks, jdbcType=VARCHAR} ,
+            del_flag = #{record.delFlag, jdbcType=CHAR} ,
+            qrcode = #{record.qrcode, jdbcType=VARCHAR} ,
+            sign = #{record.sign, jdbcType=VARCHAR} ,
+            real_name = #{record.realName, jdbcType=VARCHAR} ,
+        <if test="_parameter != null">
+            <include refid="common.Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.rats.rbac.entity.TestUser">
+        update tb_test_user
+        <set>
+            <if test="username != null">
+                username =#{username, jdbcType=VARCHAR} ,
+            </if>
+            <if test="password != null">
+                password =#{password, jdbcType=VARCHAR} ,
+            </if>
+            <if test="nickname != null">
+                nickname =#{nickname, jdbcType=VARCHAR} ,
+            </if>
+            <if test="email != null">
+                email =#{email, jdbcType=VARCHAR} ,
+            </if>
+            <if test="phone != null">
+                phone =#{phone, jdbcType=VARCHAR} ,
+            </if>
+            <if test="mobile != null">
+                mobile =#{mobile, jdbcType=VARCHAR} ,
+            </if>
+            <if test="userType != null">
+                user_type =#{userType, jdbcType=CHAR} ,
+            </if>
+            <if test="photo != null">
+                photo =#{photo, jdbcType=VARCHAR} ,
+            </if>
+            <if test="loginIp != null">
+                login_ip =#{loginIp, jdbcType=VARCHAR} ,
+            </if>
+            <if test="loginDate != null">
+                login_date =#{loginDate, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="loginFlag != null">
+                login_flag =#{loginFlag, jdbcType=VARCHAR} ,
+            </if>
+            <if test="createBy != null">
+                create_by =#{createBy, jdbcType=VARCHAR} ,
+            </if>
+            <if test="createDate != null">
+                create_date =#{createDate, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="updateBy != null">
+                update_by =#{updateBy, jdbcType=VARCHAR} ,
+            </if>
+            <if test="updateDate != null">
+                update_date =#{updateDate, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="remarks != null">
+                remarks =#{remarks, jdbcType=VARCHAR} ,
+            </if>
+            <if test="delFlag != null">
+                del_flag =#{delFlag, jdbcType=CHAR} ,
+            </if>
+            <if test="qrcode != null">
+                qrcode =#{qrcode, jdbcType=VARCHAR} ,
+            </if>
+            <if test="sign != null">
+                sign =#{sign, jdbcType=VARCHAR} ,
+            </if>
+            <if test="realName != null">
+                real_name =#{realName, jdbcType=VARCHAR} ,
+            </if>
+        </set>
+        where  id = #{id ,jdbcType=INTEGER}  and   sid = #{sid ,jdbcType=INTEGER}  
+
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.rats.rbac.entity.TestUser">
+        update tb_test_user
+        set
+            id = #{id, jdbcType=INTEGER} ,
+            sid = #{sid, jdbcType=INTEGER} ,
+            username = #{username, jdbcType=VARCHAR} ,
+            password = #{password, jdbcType=VARCHAR} ,
+            nickname = #{nickname, jdbcType=VARCHAR} ,
+            email = #{email, jdbcType=VARCHAR} ,
+            phone = #{phone, jdbcType=VARCHAR} ,
+            mobile = #{mobile, jdbcType=VARCHAR} ,
+            user_type = #{userType, jdbcType=CHAR} ,
+            photo = #{photo, jdbcType=VARCHAR} ,
+            login_ip = #{loginIp, jdbcType=VARCHAR} ,
+            login_date = #{loginDate, jdbcType=TIMESTAMP} ,
+            login_flag = #{loginFlag, jdbcType=VARCHAR} ,
+            create_by = #{createBy, jdbcType=VARCHAR} ,
+            create_date = #{createDate, jdbcType=TIMESTAMP} ,
+            update_by = #{updateBy, jdbcType=VARCHAR} ,
+            update_date = #{updateDate, jdbcType=TIMESTAMP} ,
+            remarks = #{remarks, jdbcType=VARCHAR} ,
+            del_flag = #{delFlag, jdbcType=CHAR} ,
+            qrcode = #{qrcode, jdbcType=VARCHAR} ,
+            sign = #{sign, jdbcType=VARCHAR} ,
+            real_name = #{realName, jdbcType=VARCHAR} 
+        where  id = #{id ,jdbcType=INTEGER}  and   sid = #{sid ,jdbcType=INTEGER}  
+
+    </update>
+
+    <select id="countByExample" parameterType="com.rats.framework.common.data.Example" resultType="java.lang.Long">
+        select count(*) from tb_test_user
+        <if test="_parameter != null">
+            <include refid="common.Example_Where_Clause" />
+        </if>
+    </select>
+
+</mapper>
+
+

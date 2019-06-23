@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Copyright (C) 2016 
+ * Copyright (C) 2016
  * <p/>
  *
  * @author : hanbing
@@ -50,7 +50,7 @@ public class DatabaseIntrospector {
         System.out.println(MsgFmt.getString("[start] 开始解析table信息：{0}", tableName));
         try (ResultSet rs = databaseMetaData.getTables(catalog, schema, tableName, null)) {
             if (rs.next()) {
-                table= new IntrospectedTable();
+                table = new IntrospectedTable();
                 table.setClassName(StringUtils.defaultIfBlank(className, StringTools.toCamel(tableName)));
                 table.setSubPackageName(subPackageName);
                 table.setTableName(tableName);
@@ -73,12 +73,12 @@ public class DatabaseIntrospector {
 
     public List<Column> applyColumnOverrides(List<Column> introspectedColumns) {
         List<ColumnOverride> columnOverrides = new ArrayList<>();
-        List<Column> columnList =  new ArrayList<>();
-        for(Column introspectedColumn: introspectedColumns){
-            ColumnOverride columnOverride = tableConfiguration.getColumnOverride(introspectedColumn.getColumnName());
+        List<Column> columnList = new ArrayList<>();
+        for (Column introspectedColumn : introspectedColumns) {
+            ColumnOverride columnOverride = tableConfiguration.getColumnOverride(introspectedColumn.getColumn());
             if (columnOverride != null) {
                 if (StringUtils.isNotBlank(columnOverride.getFieldName())) {
-                    introspectedColumn.setFieldName(columnOverride.getFieldName());
+                    introspectedColumn.setField(columnOverride.getFieldName());
                 }
                 if (StringUtils.isNotBlank(columnOverride.getJavaType())) {
                     introspectedColumn.setJavaType(columnOverride.getJavaType());
@@ -87,12 +87,12 @@ public class DatabaseIntrospector {
                     introspectedColumn.setJdbcType(columnOverride.getJdbcType());
                 }
                 if (columnOverride.isSerialize()) {
-                   //NOTHING
+                    //NOTHING
                 }
-                if (!columnOverride.isIgnore()) {
+                if (!columnOverride.isIgnore() && !tableConfiguration.isColumnIngore(columnOverride.getColumn())) {
                     columnList.add(introspectedColumn);
                 }
-            }else{
+            } else {
                 columnList.add(introspectedColumn);
             }
         }
@@ -112,9 +112,29 @@ public class DatabaseIntrospector {
             }
         }
         introspectedTable.setColumns(columns);
-        introspectedTable.setPkColumns(pkColumns);
-        introspectedTable.setNotPkColumns(notPkColumns);
-        introspectedTable.setPkCount(pkColumns.size());
+
+        //唯一主键
+        if (pkColumns.size() == 1) {
+            introspectedTable.setKeyColumn(pkColumns.get(0));
+            introspectedTable.setNotKeyColumns(notPkColumns);
+            introspectedTable.setKeyCount(1);
+        }
+        //没有主键，生成联合主键
+        else if (pkColumns.size() != 1) {
+            CompKey compKey = new CompKey();
+            if(pkColumns.size() > 0) {
+                compKey.setColumns(pkColumns);
+
+            } else{
+                compKey.setColumns(columns);
+            }
+            compKey.setJavaType(introspectedTable.getClassName() + ".Key");
+            compKey.setJavaTypeFull(introspectedTable.getClassName() + "$Key");
+            compKey.setField(StringUtils.uncapitalize(introspectedTable.getClassName()) + "Key");
+            introspectedTable.setCompKey(compKey);
+            introspectedTable.setNotKeyColumns(notPkColumns);
+            introspectedTable.setKeyCount(columns.size());
+        }
     }
 
 
@@ -153,7 +173,7 @@ public class DatabaseIntrospector {
                     defaultValue = DbUtils.getColumnDefault(rs, databaseMetaData);   //该列默认值
                 }
                 boolean nullable = DatabaseMetaData.columnNullable == rs.getInt("NULLABLE");
-                boolean autoIncrement =  DbUtils.isColumnAutoincrement( rs,  databaseMetaData);
+                boolean autoIncrement = DbUtils.isColumnAutoincrement(rs, databaseMetaData);
                 //boolean autoIncrement = "YES".equals(rs.getString("IS_AUTOINCREMENT"));
                 //boolean generatedColumn = "YES".equals(rs.getString("IS_GENERATEDCOLUMN"));
                 boolean pk = primaryKeys.contains(columnName);                // 是否主键
@@ -161,8 +181,8 @@ public class DatabaseIntrospector {
                 boolean indexUnique = indexUniques.contains(columnName);      // 是否唯一索引
 
                 Column column = new Column();
-                column.setColumnName(columnName);
-                column.setSqlType(dataType);
+                column.setColumn(columnName);
+                column.setDataType(dataType);
                 column.setJdbcType(typeName);
                 column.setColumnSize(columnSize);
                 column.setDecimalDigits(decimalDigits);
@@ -170,8 +190,8 @@ public class DatabaseIntrospector {
                 column.setRemark(remarks);
                 column.setNullable(nullable);
                 column.setPrimaryKey(pk);
-                column.setIndexInfo(isIndexInfo);
-                column.setIndexUnique(indexUnique);
+                column.setIndex(isIndexInfo);
+                column.setUnique(indexUnique);
                 column.setAutoIncrement(autoIncrement);
                 column.initialize();
                 columns.add(column);

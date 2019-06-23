@@ -1,6 +1,6 @@
 package com.rats.framework.common.anno;
 
-import com.rats.framework.base.BaseMapper;
+import com.rats.framework.common.base.BaseMapper;
 import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)

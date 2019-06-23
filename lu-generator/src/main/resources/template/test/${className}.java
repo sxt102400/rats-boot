@@ -1,67 +1,132 @@
-package ${@tpl_entity.packageName};
+package ${@tpl.entity.packageName};
 <#include "global.ftl">
+import com.rats.framework.common.base.BaseBean;
+
 import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
 import javax.persistence.Id;
-
+import javax.persistence.Column;
+import javax.persistence.Table;
+import javax.persistence.Entity;
 
 /** ${copyright}
  *
- * ${className}
- * Description: ${table.remark!}
+ * ${table.className}: ${table.remark!}
  *
- * @version : v1.0
- * @author : ${author!}
- * @since : ${now!}
+ * @author ${author!}
+ * @since 1.0.0
+ * @date ${now!}
  */
 @Entity
 @Table(name="${table.tableName}")
-public class ${className} implements Serializable {
-    /**
-     * Field serialVersionUID
-     */
+public class ${className} extends BaseBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
 <#-- 生成属性 -->
-<@generateColumns/>
+<@generateKeyColumns/>
+<@generateNotKeyColumns/>
 <#-- 构造方法 -->
 <@generateConstructor/>
 <#-- 生成get,set方法 -->
 <@generateJavaSetterGetter/>
-
+<#-- 生成联合主键 -->
+<@generateCompKey/>
 }
 
 <#-- entity函数定义=================== -->
 <#-- Filed字段 -->
-<#macro generateColumns>
-<#list table.columns as column>
+<#macro generateKeyColumns>
+<#if table.keyCount == 1 >
     /**
-     * Field ${column.fieldName} : ${column.remark!}
+     *  ID: ${table.keyColumn.field}  ${table.keyColumn.remark!}
      */
-    @Column("${column.columnName}")
-    private ${column.javaType} ${column.fieldName};
+    @Id
+    @Column(name="${table.keyColumn.column}")
+    private ${table.keyColumn.javaType} ${table.keyColumn.field};
+
+</#if>
+<#if table.keyCount != 1 >
+<@propertyData table.compKey.columns />
+</#if>
+</#macro>
+
+<#macro generateNotKeyColumns>
+<#list table.notKeyColumns as column>
+    /**
+     * ${column.field} ${column.remark!}
+     */
+    @Column(name="${column.column}")
+    private ${column.javaType} ${column.field};
 
 </#list>
 </#macro>
 <#-- Constructor方法 -->
 <#macro generateConstructor>
-    public ${className}(){}
+    public ${table.className}(){}
 
 </#macro>
-<#-- getter和setter方法 -->
+
+<#--============= generateJavaSetterGetter =============-->
 <#macro generateJavaSetterGetter>
-<#list table.columns as column>
-    public void set${column.fieldName?cap_first}( ${column.javaType} ${column.fieldName} ) {
-        this.${column.fieldName} = ${column.fieldName};
+<@setterGetterData table.columns />
+</#macro>
+<#-- getter和setter方法 -->
+<#macro generateCompKey>
+<#if table.keyCount != 1 >
+    public static class Key implements Serializable {
+
+            <@propertyData2 table.compKey.columns />
+            <@setterGetterData2  table.compKey.columns />
     }
 
-    public ${column.javaType} get${column.fieldName?cap_first}() {
-        return this.${column.fieldName};
+</#if>
+</#macro>
+
+
+<#--============= property columns =============-->
+<#macro propertyData columns>
+<#list columns as column>
+    /**
+     *  Id: ${column.field}   ${column.remark!}
+     */
+    @Id
+    @Column(name="${column.column}")
+    private ${column.javaType} ${column.field};
+
+</#list>
+</#macro>
+<#--============= property columns =============-->
+<#macro propertyData2 columns>
+<#list columns as column>
+        private ${column.javaType} ${column.field};
+
+</#list>
+</#macro>
+<#--============= setterGetter columns =============-->
+<#macro setterGetterData columns>
+<#list columns as column>
+    public void set${column.field?cap_first}( ${column.javaType} ${column.field} ) {
+        this.${column.field} = ${column.field};
+    }
+
+    public ${column.javaType} get${column.field?cap_first}() {
+        return this.${column.field};
     }
 
 </#list>
 </#macro>
+<#--============= setterGetter columns =============-->
+<#macro setterGetterData2 columns>
+<#list columns as column>
+        public void set${column.field?cap_first}( ${column.javaType} ${column.field} ) {
+            this.${column.field} = ${column.field};
+        }
+
+        public ${column.javaType} get${column.field?cap_first}() {
+            return this.${column.field};
+        }
+
+</#list>
+</#macro>
+
+

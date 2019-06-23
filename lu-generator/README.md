@@ -63,10 +63,10 @@
 
     <!-- 模板文件配置，此处按需自己定制编写 -->
     <templates>
-        <template name="controller" packageName="com.rats.controller" fileName="${className}Controller.java"/>
-        <template name="service" packageName="com.rats.service" fileName="${className}Service.java"/>
-        <template name="serviceImpl" packageName="com.rats.service.impl" fileName="${className}ServiceImpl.java"/>
-        <template name="dao" packageName="com.rats.dao" fileName="${className}Dao.java"/>
+        <template name="controller" packageName="com.rats.rbac.controller" fileName="${className}Controller.java"/>
+        <template name="service" packageName="com.rats.rbac.service" fileName="${className}Service.java"/>
+        <template name="serviceImpl" packageName="com.rats.rbac.service.impl" fileName="${className}ServiceImpl.java"/>
+        <template name="dao" packageName="com.rats.rbac.dao" fileName="${className}Dao.java"/>
         <template name="mapper" packageName="gen.mapper" fileName="${className}mapper.java"/>
         <template name="entity" packageName="gen.entity" fileName="${className}.java"/>
         <template name="xmlMapper" packageName="gen.xml" fileName="${className}Mapper.xml" type="xml"/>
@@ -327,7 +327,6 @@ Column属性：
 | remark | 备注 | String | "用户名" |
 | columnSize | 大小 | int | 20 |
 | decimalDigits |      |  |   |
-| sqlType | sql类型 | int | 11 |
 | javaType | java类型 | String | String |
 | jdbcType | jdbc类型 | String | VARCHAR |
 | fullJavaType | java类型（全名称） | String | java.lang.String |

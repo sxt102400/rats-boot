@@ -26,13 +26,10 @@ public interface Page<T> {
 
     boolean isLastPage();
 
-    Iterator<T> iterator();
-
-    Pageable getPageable();
+    boolean hasData();
 
     List<T> getData();
 
-    boolean hasData();
+    Iterator<T> iterator();
 
-    String toJSONString();
 }
